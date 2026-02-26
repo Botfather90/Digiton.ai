@@ -56,18 +56,6 @@ const Home = () => {
                         <span style={{ fontStyle: 'italic', color: 'transparent', WebkitTextStroke: '1px var(--text-primary)' }}>We deploy it.</span>
                     </motion.h1>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        style={{ background: 'rgba(10,10,12,0.6)', backdropFilter: 'blur(10px)', padding: '1.5rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', maxWidth: '600px', marginBottom: '3rem', width: '90%' }}
-                    >
-                        <p style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                            <strong className="text-primary" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '1.25rem' }}>30+ clients. 10+ industries. €200K+ in delivered automation.</strong>
-                            From dental clinics to government archives to EV infrastructure - we build the AI systems that run your business while you sleep.
-                        </p>
-                    </motion.div>
-
                     <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}>
                         <LeadMagnetCTA text="Book Discovery Call" variant="primary" />
                     </motion.div>

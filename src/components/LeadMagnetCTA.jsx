@@ -13,7 +13,7 @@ export const LeadMagnetCTA = ({ text = "Book Discovery Call", variant = "primary
 
     // Simulate finding Calendly link after audit
     const handleComplete = () => {
-        window.open('https://calendly.com/brandon-digiton/30min', '_blank');
+        window.open('https://calendly.com/contact-digiton', '_blank');
         if (!embedded) {
             setIsOpen(false);
         }

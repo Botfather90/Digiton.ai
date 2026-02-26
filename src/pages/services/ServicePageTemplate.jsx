@@ -22,7 +22,7 @@ const ServicePageTemplate = ({ title, subtitle, price, description, features }) 
                         </p>
 
                         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', marginBottom: '4rem', paddingBottom: '4rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                            <a href="https://calendly.com/digiton/discovery" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
+                            <a href="https://calendly.com/contact-digiton" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
                                 Deploy System
                             </a>
                             <span className="label-mono">Starting at {price}</span>
