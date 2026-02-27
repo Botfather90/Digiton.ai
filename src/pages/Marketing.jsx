@@ -74,7 +74,7 @@ const Marketing = () => {
                             if (idx === 5) colSpan = 'span 8';
 
                             return (
-                                <Link to={service.link} key={idx} style={{ gridColumn: colSpan, display: 'block', textDecoration: 'none' }}>
+                                <Link to={service.link} key={idx} className="mobile-col-span-12" style={{ gridColumn: colSpan, display: 'block', textDecoration: 'none' }}>
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -120,39 +120,7 @@ const Marketing = () => {
                 </motion.div>
             </section>
 
-            {/* Testimonials Marquee */}
-            <section style={{ padding: '6rem 0', background: 'var(--bg-secondary)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '200px', background: 'linear-gradient(90deg, var(--bg-secondary) 0%, transparent 100%)', zIndex: 2 }} />
-                <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '200px', background: 'linear-gradient(-90deg, var(--bg-secondary) 0%, transparent 100%)', zIndex: 2 }} />
-
-                <div className="container" style={{ marginBottom: '4rem', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>Client <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Verification</span></h2>
-                </div>
-
-                <div
-                    style={{ display: 'flex', gap: '2rem', overflowX: 'auto', padding: '1rem 5vw 3rem 5vw', scrollSnapType: 'x mandatory', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-                    className="hide-scrollbar"
-                >
-                    {[
-                        { quote: "Our lead flow doubled in the first month. The automations they built are flawless.", author: "Sarah J.", role: "CMO, MedTech Solutions" },
-                        { quote: "Digiton rebuilt our entire organic pipeline. We rank for keywords we thought were impossible.", author: "David P.", role: "Founder, Portfolio Portugal" },
-                        { quote: "They don't just run ads; they build interconnected acquisition systems. Incredible ROI.", author: "Elena R.", role: "VP Growth, EV Global" },
-                        { quote: "The AI segmentation completely changed how we engage returning customers. Massive LTV bump.", author: "James T.", role: "Head of E-Com" }
-                    ].map((test, idx) => (
-                        <div key={idx} style={{
-                            background: 'var(--bg-primary)', padding: '3rem', borderRadius: '24px',
-                            border: '1px solid rgba(255,255,255,0.05)', minWidth: '350px', maxWidth: '450px', scrollSnapAlign: 'center',
-                            display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
-                        }} className="hover:border-accent/30 transition-colors">
-                            <p style={{ fontSize: '1.25rem', color: 'var(--text-primary)', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '2rem' }}>"{test.quote}"</p>
-                            <div>
-                                <p style={{ margin: 0, fontWeight: 600, color: 'var(--accent)' }}>{test.author}</p>
-                                <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-tertiary)' }}>{test.role}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            {/* Testimonials Marquee Removed per user request */}
 
             {/* Methodology / What We Do Section */}
             <section style={{ padding: '10rem 0' }} className="container">

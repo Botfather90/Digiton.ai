@@ -295,7 +295,7 @@ const Home = () => {
             {/* Global Presence / Location */}
             <section style={{ padding: '10rem 0', position: 'relative', overflow: 'hidden' }}>
                 <div className="container">
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }} className="lg:grid-cols-2 grid-cols-1">
+                    <div style={{ display: 'grid', gap: '6rem', alignItems: 'center' }} className="lg:grid-cols-2 grid-cols-1">
                         <div>
                             <span className="label-mono text-accent">Where We Operate</span>
                             <h2 style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginTop: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Global Trust. <br /><span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Local Context.</span></h2>

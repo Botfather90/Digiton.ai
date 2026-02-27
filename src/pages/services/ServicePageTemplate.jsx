@@ -21,15 +21,17 @@ const ServicePageTemplate = ({ title, subtitle, price, description, features }) 
                             {subtitle}
                         </p>
 
-                        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', marginBottom: '4rem', paddingBottom: '4rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div className="flex-col md:flex-row" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', marginBottom: '4rem', paddingBottom: '4rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                             <a href="https://calendly.com/contact-digiton" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
                                 Deploy System
                             </a>
-                            <span className="label-mono">Starting at {price}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', height: '100%', padding: '1rem 0' }}>
+                                <span className="label-mono">Starting at {price}</span>
+                            </div>
                         </div>
                     </motion.div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem' }}>
+                    <div className="grid-cols-1 lg:grid-cols-2" style={{ display: 'grid', gap: '4rem' }}>
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}

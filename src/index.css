@@ -674,3 +674,68 @@ a {
   color: var(--text-tertiary);
   font-size: 0.85rem;
 }
+
+/* --- Tailwind-like Utility Classes for Mobile Responsiveness --- */
+.flex-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.grid-cols-1 {
+  display: grid !important;
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+
+.grid-cols-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Navbar mobile fix */
+@media (max-width: 768px) {
+  .nav-links {
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    max-width: 50vw;
+    padding-bottom: 5px;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+
+  .md\:inline-flex {
+    display: inline-flex !important;
+  }
+
+  .md\:hidden {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

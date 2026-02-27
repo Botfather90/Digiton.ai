@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Mic, Send, Volume2, VolumeX, MicOff } from 'lucide-react';
+import { MessageSquare, X, Mic, Send, Volume2, VolumeX, MicOff, AlertCircle } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Requires VITE_GEMINI_API_KEY in .env
-const apiKey = 'AIzaSyCPF6wegBIU0V9B6FbXxGGQoY8yNKK74kU' || import.meta.env.VITE_GEMINI_API_KEY || '';
-// genAI is instantiated inside handleSend to prevent page crashes if key is missing
-
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 
 export const VoiceChat = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +15,32 @@ export const VoiceChat = () => {
     const [isListening, setIsListening] = useState(false);
     const [voiceEnabled, setVoiceEnabled] = useState(true);
     const [isThinking, setIsThinking] = useState(false);
+    const [speechError, setSpeechError] = useState('');
+
+    // Floating balloon notifications state
+    const [notifications, setNotifications] = useState([]);
+    const notificationIdRef = useRef(0);
 
     const messagesEndRef = useRef(null);
     const recognitionRef = useRef(null);
+
+    // Initial greeting balloon
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            addNotification("Hey! Do you need help?");
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const addNotification = (text) => {
+        const id = notificationIdRef.current++;
+        setNotifications(prev => [...prev, { id, text }]);
+
+        // Remove after 6 seconds (enough time for it to float up and disappear)
+        setTimeout(() => {
+            setNotifications(prev => prev.filter(n => n.id !== id));
+        }, 6000);
+    };
 
     // Initialize Speech Recognition
     useEffect(() => {
@@ -33,6 +54,19 @@ export const VoiceChat = () => {
                 const transcript = event.results[0][0].transcript;
                 setInput(transcript);
                 handleSend(transcript);
+                setSpeechError('');
+            };
+
+            recognitionRef.current.onerror = (event) => {
+                console.error("Speech Recognition Error:", event.error);
+                if (event.error === 'not-allowed') {
+                    setSpeechError('Microphone access denied.');
+                } else if (event.error === 'no-speech') {
+                    setSpeechError('No speech detected.');
+                } else {
+                    setSpeechError(`Error: ${event.error}`);
+                }
+                setIsListening(false);
             };
 
             recognitionRef.current.onend = () => {
@@ -55,7 +89,6 @@ export const VoiceChat = () => {
         window.speechSynthesis.cancel(); // cancel previous
         const utterance = new SpeechSynthesisUtterance(text);
 
-        // Try to find a good English voice
         const voices = window.speechSynthesis.getVoices();
         const preferredVoice = voices.find(v => v.name.includes('Google') && v.lang.includes('en')) || voices[0];
         if (preferredVoice) utterance.voice = preferredVoice;
@@ -66,6 +99,7 @@ export const VoiceChat = () => {
     };
 
     const toggleListen = () => {
+        setSpeechError('');
         if (isListening) {
             recognitionRef.current?.stop();
             setIsListening(false);
@@ -75,7 +109,8 @@ export const VoiceChat = () => {
                 recognitionRef.current?.start();
                 setIsListening(true);
             } catch (e) {
-                console.error("Microphone error:", e);
+                console.error("Microphone start error:", e);
+                setSpeechError('Could not start microphone.');
                 setIsListening(false);
             }
         }
@@ -92,12 +127,12 @@ export const VoiceChat = () => {
         setMessages(prev => [...prev, userMsg]);
         setInput('');
         setIsThinking(true);
+        setSpeechError('');
 
         try {
             const genAI = new GoogleGenerativeAI(apiKey);
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-            // Build system context
             const systemPrompt = "You are the Digiton Voice Assistant. You help users understand Digiton's AI transformation services, Academy, and engineering solutions. Be concise, professional, and slightly futuristic. Don't use heavy markdown formatting since your response might be spoken out loud.";
 
             const prompt = `${systemPrompt}\n\nUser: ${textToSend}`;
@@ -105,12 +140,26 @@ export const VoiceChat = () => {
             const responseText = result.response.text();
 
             setMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
+
+            // Pop up a balloon notification if the UI is closed (or even if open, as it adds dynamic feel)
+            if (!isOpen) {
+                addNotification(responseText.length > 60 ? responseText.substring(0, 60) + "..." : responseText);
+            }
+
             if (voiceEnabled) {
                 speakText(responseText);
             }
         } catch (error) {
-            console.error(error);
-            setMessages(prev => [...prev, { role: 'assistant', content: "An error occurred connecting to the neural network." }]);
+            console.error("Gemini Error:", error);
+            let userMsg = "An error occurred connecting to the neural network.";
+            if (error.message && error.message.includes('403') && error.message.includes('reported as leaked')) {
+                userMsg = "My API key has been revoked by Google. The owner needs to update it in the .env.local file.";
+            } else if (error.status === 403) {
+                userMsg = "My API key is invalid or was revoked by Google. Please update it.";
+            }
+
+            setMessages(prev => [...prev, { role: 'assistant', content: userMsg }]);
+            if (!isOpen) addNotification("Connection error.");
         } finally {
             setIsThinking(false);
         }
@@ -118,6 +167,41 @@ export const VoiceChat = () => {
 
     return (
         <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 9999 }}>
+
+            {/* Floating Balloons Area */}
+            <div style={{ position: 'absolute', bottom: '80px', right: '0px', width: '250px', display: 'flex', flexDirection: 'column-reverse', pointerEvents: 'none', gap: '10px' }}>
+                <AnimatePresence>
+                    {notifications.map(note => (
+                        <motion.div
+                            key={note.id}
+                            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                            animate={{ opacity: 1, y: -40, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+                            transition={{ duration: 4, ease: "easeOut" }}
+                            style={{
+                                background: 'rgba(10, 10, 12, 0.9)',
+                                backdropFilter: 'blur(10px)',
+                                border: '1px solid rgba(255, 206, 59, 0.3)',
+                                padding: '1rem',
+                                borderRadius: '16px 16px 0px 16px',
+                                color: 'var(--text-primary)',
+                                fontSize: '0.9rem',
+                                boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                                pointerEvents: 'auto',
+                                cursor: 'pointer'
+                            }}
+                            onClick={() => setIsOpen(true)}
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 8px var(--accent)' }} />
+                                <span className="label-mono" style={{ color: 'var(--accent)', fontSize: '0.75rem' }}>Digiton AI</span>
+                            </div>
+                            {note.text}
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </div>
+
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -143,7 +227,7 @@ export const VoiceChat = () => {
                         {/* Header */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,206,59,0.05)' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)' }} />
+                                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'active' ? 'var(--accent)' : 'red', boxShadow: '0 0 10px var(--accent)' }} />
                                 <span className="label-mono text-primary" style={{ fontSize: '0.9rem' }}>Digiton Voice AI</span>
                             </div>
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -155,6 +239,20 @@ export const VoiceChat = () => {
                                 </button>
                             </div>
                         </div>
+
+                        {/* Speech Error Banner */}
+                        <AnimatePresence>
+                            {speechError && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    style={{ background: 'rgba(255, 95, 86, 0.1)', color: '#FF5F56', padding: '0.5rem 1rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid rgba(255, 95, 86, 0.2)' }}
+                                >
+                                    <AlertCircle size={14} /> {speechError}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
 
                         {/* Messages */}
                         <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -202,7 +300,7 @@ export const VoiceChat = () => {
                                         transition: 'all 0.3s'
                                     }}
                                 >
-                                    {isListening ? <Mic size={18} /> : <MicOff size={18} />}
+                                    {isListening ? <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 1 }}><Mic size={18} /></motion.div> : <MicOff size={18} />}
                                 </button>
 
                                 <input
@@ -262,3 +360,4 @@ export const VoiceChat = () => {
         </div>
     );
 };
+

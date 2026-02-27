@@ -17,6 +17,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Discovery from './pages/Discovery';
 import Academy from './pages/Academy';
+import NotFound from './pages/NotFound';
 
 // ScrollToTop component
 const ScrollToTop = () => {
@@ -74,6 +75,9 @@ const AnimatedRoutes = () => {
         <Route path="/services/marketing/brand-architecture" element={<BrandArchitecture />} />
         <Route path="/services/marketing/high-velocity-web" element={<HighVelocityWeb />} />
         <Route path="/services/marketing/content-engines" element={<ContentEngines />} />
+
+        {/* 404 Catch All */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
