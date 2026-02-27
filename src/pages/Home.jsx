@@ -233,21 +233,21 @@ const Home = () => {
                             name="Brandon da Costa"
                             role="CEO & AI Architect"
                             description="8 years in marketing and tech. Built websites since 11. Now builds the AI systems that replace the manual work he used to do."
-                            image="/src/assets/brandon.jpg"
+                            image="/team/brandon.jpg"
                             delay={0}
                         />
                         <TeamMember
                             name="Sasha Rodrigues"
                             role="Co-founder, Head of Growth"
                             description="Ex-Reddit Marketing. Community growth specialist. Drives market adoption across 8 industries."
-                            image="/src/assets/sasha.png"
+                            image="/team/sasha.png"
                             delay={0.2}
                         />
                         <TeamMember
                             name="Woohyuck"
                             role="CTO"
                             description="Full-stack engineer. Builds the platforms, ships the code, breaks the production servers (and fixes them secretly)."
-                            image="/src/assets/woohyuck.jpg"
+                            image="/team/woohyuck.jpg"
                             delay={0.4}
                         />
                     </div>
