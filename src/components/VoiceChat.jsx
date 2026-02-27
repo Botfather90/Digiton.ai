@@ -5,7 +5,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Requires VITE_GEMINI_API_KEY in .env
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-const genAI = new GoogleGenerativeAI(apiKey);
+// genAI is instantiated inside handleSend to prevent page crashes if key is missing
+
 
 export const VoiceChat = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +94,7 @@ export const VoiceChat = () => {
         setIsThinking(true);
 
         try {
+            const genAI = new GoogleGenerativeAI(apiKey);
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
             // Build system context
