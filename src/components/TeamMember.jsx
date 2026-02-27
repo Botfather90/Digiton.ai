@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Linkedin, Mail, ArrowRight } from 'lucide-react';
 
-export const TeamMember = ({ name, role, description, links = {}, delay = 0 }) => {
+export const TeamMember = ({ name, role, description, image, links = {}, delay = 0 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const layoutId = `team-member-${name.replace(/\s+/g, '-').toLowerCase()}`;
     const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2);
@@ -36,13 +36,18 @@ export const TeamMember = ({ name, role, description, links = {}, delay = 0 }) =
                 <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '60%', background: 'radial-gradient(circle at top right, rgba(255,206,59,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    {/* Placeholder Avatar */}
+                    {/* Avatar */}
                     <div style={{
                         width: '60px', height: '60px', borderRadius: '50%',
                         background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.25rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)'
+                        fontSize: '1.25rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)',
+                        overflow: 'hidden'
                     }}>
-                        {initials}
+                        {image ? (
+                            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                            initials
+                        )}
                     </div>
                     {links.linkedin && (
                         <div style={{ color: 'var(--text-tertiary)' }} className="group-hover:text-accent transition-colors">
@@ -111,9 +116,14 @@ export const TeamMember = ({ name, role, description, links = {}, delay = 0 }) =
                                     <div style={{
                                         width: '100px', height: '100px', borderRadius: '50%',
                                         background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        fontSize: '2rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)'
+                                        fontSize: '2rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)',
+                                        overflow: 'hidden'
                                     }}>
-                                        {initials}
+                                        {image ? (
+                                            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        ) : (
+                                            initials
+                                        )}
                                     </div>
                                     <motion.div>
                                         <motion.h3 style={{ fontSize: '3rem', margin: '0 0 0.5rem 0', letterSpacing: '-0.03em', lineHeight: 1 }}>{name}</motion.h3>

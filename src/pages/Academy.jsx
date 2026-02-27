@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
-import { MonitorPlay, Users, Zap, CheckCircle2 } from 'lucide-react';
+import { MonitorPlay, Users, Zap, CheckCircle2, TerminalSquare, ArrowRight } from 'lucide-react';
 
 const Academy = () => {
     const { scrollYProgress } = useScroll();
@@ -51,18 +51,18 @@ const Academy = () => {
                         </p>
 
                         <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            <a href="#webinars" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', letterSpacing: '0.05em' }}>
-                                View Webinars
+                            <a href="#offerings" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', letterSpacing: '0.05em' }}>
+                                View Offerings
                             </a>
-                            <a href="#corporate" className="btn btn-glass" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', letterSpacing: '0.05em' }}>
-                                Team Training
+                            <a href="#curriculum" className="btn btn-glass" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', letterSpacing: '0.05em' }}>
+                                See Curriculum
                             </a>
                         </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* STATEMENT SEPARATOR */}
+            {/* QUICK HIGHLIGHTS */}
             <section style={{ padding: '4rem 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'var(--bg-secondary)' }}>
                 <div className="container" style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '2rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--text-secondary)' }}>
@@ -77,109 +77,204 @@ const Academy = () => {
                 </div>
             </section>
 
-            {/* CORE OFFERINGS - BENTO STYLE */}
-            <section className="container" style={{ padding: '10rem 0' }}>
-                <motion.div variants={fadeUpVariant} style={{ textAlign: 'center', marginBottom: '6rem' }}>
-                    <h2 style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', letterSpacing: '-0.03em' }}>Choose Your <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Path</span></h2>
-                </motion.div>
+            {/* WHO IS THIS FOR? */}
+            <section className="container" style={{ padding: '8rem 0' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', marginBottom: '6rem' }}>
+                    <span className="label-mono text-accent block mb-4">THE AUDIENCE</span>
+                    <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.03em', marginBottom: '2rem' }}>Built for the bold.</h2>
+                    <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>This isn't theory. This is the exact playbook we use to build multi-agent systems for enterprise clients. If you want to replace manual labor with scalable systems, this is for you.</p>
+                </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card" style={{ padding: '3rem' }}>
+                        <h3 className="text-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Founders & Executives</h3>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Stop paying for headcount when a webhook can do the job faster, cheaper, and without errors.</p>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="glass-card" style={{ padding: '3rem' }}>
+                        <h3 className="text-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Operations Teams</h3>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Escape the spreadsheet. Learn how to map, build, and deploy automated data pipelines that update themselves.</p>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="glass-card" style={{ padding: '3rem' }}>
+                        <h3 className="text-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Agency Owners</h3>
+                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>Differentiate your offer. Implement AI backends for your clients and increase your retainer value.</p>
+                    </motion.div>
+                </div>
+            </section>
 
-                    {/* OFFERING 1: TRIMONTHLY WEBINARS */}
-                    <div id="webinars" className="glass-card group" style={{ padding: '4rem', display: 'flex', flexDirection: 'column', minHeight: '600px', cursor: 'pointer', transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)' }}>
-                        <div style={{
-                            position: 'absolute', top: 0, left: 0, right: 0, height: '4px',
-                            background: 'linear-gradient(90deg, transparent, var(--accent), transparent)',
-                            opacity: 0.5, transform: 'scaleX(0)', transformOrigin: 'left', transition: 'transform 0.5s ease'
-                        }} className="group-hover:scale-x-100" />
-
-                        <div style={{ marginBottom: 'auto' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                                <div style={{ background: 'rgba(255,206,59,0.1)', padding: '1rem', borderRadius: '16px', color: 'var(--accent)' }}>
-                                    <MonitorPlay size={32} />
-                                </div>
-                                <span className="label-mono text-secondary">Intense & Tactical</span>
-                            </div>
-
-                            <h3 style={{ fontSize: '3rem', marginBottom: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Trimonthly <br />Webinars</h3>
-                            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '3rem' }}>
-                                A deep-dive 4-hour online sprint held every 3 months. We build live, dissect complex n8n workflows, and show you exactly how to structure agentic LLM pipelines.
-                            </p>
-
-                            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 3rem 0', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Live build-alongs (n8n, Make, OpenAI)
-                                </li>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Q&A and architecture teardowns
-                                </li>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Access to workflow templates
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-                            <div>
-                                <span className="label-mono text-secondary block mb-1">Registration Fee</span>
-                                <span style={{ fontSize: '2.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>€200</span>
-                            </div>
-                            <a href="https://calendly.com/digiton/webinar" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
-                                Secure Your Seat
-                            </a>
-                        </div>
+            {/* THE PILLARS (What you walk away with) */}
+            <section style={{ padding: '8rem 0', background: 'var(--bg-secondary)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="container" style={{ maxWidth: '1000px' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                        <span className="label-mono text-accent block mb-4">THE OUTCOME</span>
+                        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.03em' }}>What you walk away with.</h2>
                     </div>
 
-                    {/* OFFERING 2: TEAM TRAINING */}
-                    <div id="corporate" className="glass-card group" style={{ padding: '4rem', display: 'flex', flexDirection: 'column', minHeight: '600px', cursor: 'pointer', transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)' }}>
-                        <div style={{
-                            position: 'absolute', top: 0, left: 0, right: 0, height: '4px',
-                            background: 'linear-gradient(90deg, transparent, #FFF, transparent)',
-                            opacity: 0.2, transform: 'scaleX(0)', transformOrigin: 'left', transition: 'transform 0.5s ease'
-                        }} className="group-hover:scale-x-100" />
-
-                        <div style={{ marginBottom: 'auto' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                                <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '16px', color: 'var(--text-primary)' }}>
-                                    <Users size={32} />
-                                </div>
-                                <span className="label-mono text-secondary">In-Person or Online</span>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '3rem' }}>
+                        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', background: 'rgba(255,255,255,0.02)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                            <div style={{ background: 'rgba(255,206,59,0.1)', color: 'var(--accent)', padding: '1rem', borderRadius: '16px' }}>
+                                <TerminalSquare size={32} />
                             </div>
-
-                            <h3 style={{ fontSize: '3rem', marginBottom: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Corporate & <br />Team Training</h3>
-                            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '3rem' }}>
-                                Designed for executives and operator teams. We audit your existing processes and build a tailored curriculum to train your staff on implementing compound automation.
-                            </p>
-
-                            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 3rem 0', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Tailored to your specific industry constraints
-                                </li>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Solo executive mapping or full team workshops
-                                </li>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-                                    <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Available in-person (Lisbon HQ) or remote
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                             <div>
-                                <span className="label-mono text-secondary block mb-1">Tailored Pricing</span>
-                                <span style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>Upon Consultation</span>
+                                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>The Infrastructure Setup</h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>Your own self-hosted automation environment. We show you how to set up n8n and Make.com architectures that don't cost thousands a month in SaaS fees.</p>
                             </div>
-                            <a href="https://calendly.com/contact-digiton" target="_blank" rel="noreferrer" className="btn btn-glass" style={{ padding: '1rem 2rem' }}>
-                                Request Proposal
-                            </a>
-                        </div>
-                    </div>
+                        </motion.div>
 
+                        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', background: 'rgba(255,255,255,0.02)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '16px' }}>
+                                <Zap size={32} />
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Agentic Engineering Skills</h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>It's not just ChatGPT prompts. It's connecting OpenAI assistants to webhooks, giving them tools to read Google Sheets, send emails, and make logical decisions autonomously.</p>
+                            </div>
+                        </motion.div>
+
+                        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', background: 'rgba(255,255,255,0.02)', padding: '3rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '16px' }}>
+                                <MonitorPlay size={32} />
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Production-Ready Systems</h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>You leave with actual, functioning workflows deployed for your business. Lead processing, customer onboarding, data extraction—built and running.</p>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* THE CURRICULUM */}
+            <section id="curriculum" className="container" style={{ padding: '10rem 0' }}>
+                <div style={{ textAlign: 'center', marginBottom: '6rem', maxWidth: '800px', margin: '0 auto 6rem auto' }}>
+                    <span className="label-mono text-accent block mb-4">THE FRAMEWORK</span>
+                    <h2 style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', letterSpacing: '-0.03em', marginBottom: '2rem' }}>The Knowledge Blueprint.</h2>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', lineHeight: 1.6 }}>Whether you take the intense Webinar Sprint or the customized Corporate Training, this is the core curriculum we adapt to your needs.</p>
+                </div>
+
+                <div style={{ display: 'grid', gap: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+                    {[
+                        { step: "01", title: "API Logic & Architecture", desc: "Understanding JSON, webhooks, and how the internet actually communicates beneath the UI." },
+                        { step: "02", title: "Node-Based Automations", desc: "Mastering n8n and Make.com. Triggers, custom HTTP requests, routing, and error handling." },
+                        { step: "03", title: "LLM Orchestration", desc: "Moving beyond basic text generation. Structuring prompts for JSON extraction, summarization, and tone mapping." },
+                        { step: "04", title: "Building Autonomous Agents", desc: "Giving LLMs tools. Creating agents that can decide when to search the web, when to read a database, and when to ask a human for approval." },
+                        { step: "05", title: "Deployment & Scaling", desc: "Securing your webhooks, managing server loads, and ensuring your systems don't break in production." }
+                    ].map((item, i) => (
+                        <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="glass-card group" style={{ padding: '2.5rem', display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                            <span className="label-mono text-accent" style={{ fontSize: '2rem', opacity: 0.5 }}>{item.step}</span>
+                            <div>
+                                <h4 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>{item.title}</h4>
+                                <p style={{ color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
+            {/* CORE OFFERINGS - BENTO STYLE (MOVED TO BOTTOM) */}
+            <section id="offerings" style={{ padding: '10rem 0', background: 'var(--bg-secondary)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div className="container">
+                    <motion.div variants={fadeUpVariant} style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                        <h2 style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', letterSpacing: '-0.03em' }}>Choose Your <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Path</span></h2>
+                    </motion.div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
+
+                        {/* OFFERING 1: TRIMONTHLY WEBINARS */}
+                        <div className="glass-card group" style={{ padding: '4rem', display: 'flex', flexDirection: 'column', minHeight: '600px', cursor: 'pointer', transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)', background: 'rgba(4,4,5,1)' }}>
+                            <div style={{
+                                position: 'absolute', top: 0, left: 0, right: 0, height: '4px',
+                                background: 'linear-gradient(90deg, transparent, var(--accent), transparent)',
+                                opacity: 0.5, transform: 'scaleX(0)', transformOrigin: 'left', transition: 'transform 0.5s ease'
+                            }} className="group-hover:scale-x-100" />
+
+                            <div style={{ marginBottom: 'auto' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                                    <div style={{ background: 'rgba(255,206,59,0.1)', padding: '1rem', borderRadius: '16px', color: 'var(--accent)' }}>
+                                        <MonitorPlay size={32} />
+                                    </div>
+                                    <span className="label-mono text-secondary">Intense & Tactical</span>
+                                </div>
+
+                                <h3 style={{ fontSize: '3rem', marginBottom: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Trimonthly <br />Webinars</h3>
+                                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '3rem' }}>
+                                    A deep-dive 4-hour online sprint held every 3 months. We build live, dissect complex workflows, and show you exactly how to structure agentic pipelines.
+                                </p>
+
+                                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 3rem 0', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Live build-alongs
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Architecture teardowns
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-accent" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Access to templates
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                                <div>
+                                    <span className="label-mono text-secondary block mb-1">Registration Fee</span>
+                                    <span style={{ fontSize: '2.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>€200</span>
+                                </div>
+                                <a href="https://calendly.com/digiton/webinar" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
+                                    Secure Your Seat
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* OFFERING 2: TEAM TRAINING */}
+                        <div className="glass-card group" style={{ padding: '4rem', display: 'flex', flexDirection: 'column', minHeight: '600px', cursor: 'pointer', transition: 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)', background: 'rgba(4,4,5,1)' }}>
+                            <div style={{
+                                position: 'absolute', top: 0, left: 0, right: 0, height: '4px',
+                                background: 'linear-gradient(90deg, transparent, #FFF, transparent)',
+                                opacity: 0.2, transform: 'scaleX(0)', transformOrigin: 'left', transition: 'transform 0.5s ease'
+                            }} className="group-hover:scale-x-100" />
+
+                            <div style={{ marginBottom: 'auto' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                                    <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '16px', color: 'var(--text-primary)' }}>
+                                        <Users size={32} />
+                                    </div>
+                                    <span className="label-mono text-secondary">In-Person or Online</span>
+                                </div>
+
+                                <h3 style={{ fontSize: '3rem', marginBottom: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>Corporate & <br />Team Training</h3>
+                                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '3rem' }}>
+                                    Designed for executives and operator teams. We audit your existing processes and build a tailored curriculum to train your staff on implementing compound automation.
+                                </p>
+
+                                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 3rem 0', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Tailored constraints
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Full team workshops
+                                    </li>
+                                    <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                                        <CheckCircle2 className="text-secondary" size={20} style={{ flexShrink: 0, marginTop: '4px' }} /> Remote or Lisbon HQ
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                                <div>
+                                    <span className="label-mono text-secondary block mb-1">Tailored Pricing</span>
+                                    <span style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>Upon Consultation</span>
+                                </div>
+                                <a href="https://calendly.com/contact-digiton" target="_blank" rel="noreferrer" className="btn btn-glass" style={{ padding: '1rem 2rem' }}>
+                                    Request Proposal
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
             {/* COACH */}
-            <section style={{ padding: '8rem 0', background: 'var(--bg-secondary)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            <section style={{ padding: '8rem 0', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                 <div className="container" style={{ maxWidth: '900px' }}>
                     <motion.div variants={fadeUpVariant} style={{ textAlign: 'center' }}>
                         <span className="label-mono text-accent block mb-4">THE ARCHITECT</span>
