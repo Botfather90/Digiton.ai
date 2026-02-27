@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
 import { Webhook, PlugZap, RefreshCw } from 'lucide-react';
+import { APIVis } from '../../../components/animations/APIVis';
+import { SEO } from '../../../components/SEO';
 
 const APIIntegration = () => {
     return (
         <AnimatedPage>
+            <SEO title="API & Integration" canonicalUrl="/services/ai/api-integration" />
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: 0 }} />
 
@@ -29,6 +32,10 @@ const APIIntegration = () => {
             </section>
 
             <section className="container" style={{ padding: '8rem 0' }}>
+                <div style={{ marginBottom: '6rem' }}>
+                    <APIVis />
+                </div>
+
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem', gridAutoRows: 'minmax(300px, auto)' }}>
 
                     <motion.div

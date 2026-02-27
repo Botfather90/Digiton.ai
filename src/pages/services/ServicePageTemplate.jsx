@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { AnimatedPage } from '../../components/AnimatedPage';
 import { InteractiveText } from '../../components/InteractiveText';
 
-const ServicePageTemplate = ({ title, subtitle, price, description, features }) => {
+const ServicePageTemplate = ({ title, subtitle, price, description, features, VisualComponent }) => {
     return (
         <AnimatedPage>
             <section style={{ minHeight: '100vh', paddingTop: '15rem', paddingBottom: '8rem', position: 'relative' }}>
@@ -40,9 +40,17 @@ const ServicePageTemplate = ({ title, subtitle, price, description, features }) 
                             style={{ position: 'sticky', top: '10rem', height: 'fit-content' }}
                         >
                             <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>The Use Case</h3>
-                            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '1.1rem' }}>
+                            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontSize: '1.1rem', marginBottom: '3rem' }}>
                                 {description}
                             </p>
+
+                            {/* Unique Page Animation Container */}
+                            {VisualComponent && (
+                                <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '24px', padding: '2rem', minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                                    <VisualComponent />
+                                </div>
+                            )}
+
                         </motion.div>
 
                         <motion.div

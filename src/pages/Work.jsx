@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
-import { X, ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const Work = () => {
     const { scrollYProgress } = useScroll();
@@ -173,7 +174,8 @@ const Work = () => {
 
     return (
         <AnimatedPage>
-            <section style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 2rem' }} className="container">
+            <SEO title="Our Work & Case Studies" canonicalUrl="/work" />
+            <section style={{ minHeight: '90vh', padding: '120px 0 6rem 0', position: 'relative' }} className="container">
                 <motion.div variants={fadeUpVariant} style={{ maxWidth: '1200px' }}>
                     <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: 0.9, letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
                         Artifacts<br />of <span className="text-secondary" style={{ fontStyle: 'italic' }}>Scale</span>

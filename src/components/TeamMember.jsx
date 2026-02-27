@@ -138,7 +138,15 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                                         overflow: 'hidden'
                                     }}>
                                         {image ? (
-                                            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            <div style={{ position: 'relative', width: '100%', paddingBottom: '125%', overflow: 'hidden' }}>
+                                                <motion.img
+                                                    src={image}
+                                                    alt={name}
+                                                    whileHover={{ scale: 1.05 }}
+                                                    transition={{ duration: 0.4 }}
+                                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                                                />
+                                            </div>
                                         ) : (
                                             initials
                                         )}

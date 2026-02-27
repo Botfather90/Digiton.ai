@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { ValuesSection } from '../components/ValuesSection';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { SEO } from '../components/SEO';
 
 const About = () => {
     const timelineRef = useRef(null);
@@ -21,6 +22,7 @@ const About = () => {
 
     return (
         <AnimatedPage>
+            <SEO title="About Digiton" canonicalUrl="/about" />
             <section className="hero-section container" style={{ minHeight: '60vh' }}>
                 <motion.div variants={fadeUpVariant} className="hero-badge">
                     <span className="label-mono">About Us</span>

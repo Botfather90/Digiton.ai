@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
 import { MonitorPlay, Users, Zap, CheckCircle2, TerminalSquare, ArrowRight } from 'lucide-react';
+import { LeadModal } from '../components/LeadModal';
+import { SEO } from '../components/SEO';
 
 const Academy = () => {
     const { scrollYProgress } = useScroll();
     const yAnim = useTransform(scrollYProgress, [0, 1], [0, -100]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalContext, setModalContext] = useState('');
 
     return (
         <AnimatedPage>
+            <SEO title="Digiton Academy" canonicalUrl="/academy" />
             {/* POWERFUL HERO */}
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '200px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.5, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
@@ -238,9 +243,12 @@ const Academy = () => {
                                     <span className="label-mono text-secondary block mb-1">Registration</span>
                                     <span style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>Join Waitlist</span>
                                 </div>
-                                <a href="https://calendly.com/digiton/webinar" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
+                                <button 
+                                    onClick={() => { setModalContext('Trimonthly Webinars'); setIsModalOpen(true); }}
+                                    className="btn btn-primary" style={{ padding: '1rem 2rem', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-heading)', fontWeight: 600 }}
+                                >
                                     Secure Your Seat
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -283,9 +291,12 @@ const Academy = () => {
                                     <span className="label-mono text-secondary block mb-1">Tailored Pricing</span>
                                     <span style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>Upon Consultation</span>
                                 </div>
-                                <a href="https://calendly.com/contact-digiton" target="_blank" rel="noreferrer" className="btn btn-glass" style={{ padding: '1rem 2rem' }}>
+                                <button 
+                                    onClick={() => { setModalContext('Corporate & Team Training'); setIsModalOpen(true); }}
+                                    className="btn btn-glass" style={{ padding: '1rem 2rem', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', fontFamily: 'var(--font-heading)', fontWeight: 600, background: 'rgba(255,255,255,0.05)' }}
+                                >
                                     Request Proposal
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -310,6 +321,11 @@ const Academy = () => {
                 </div>
             </section>
 
+            <LeadModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                context={modalContext} 
+            />
         </AnimatedPage>
     );
 };

@@ -9,6 +9,7 @@ import { TeamMember } from '../components/TeamMember';
 import { HorizontalCaseStudies } from '../components/HorizontalCaseStudies';
 import { InteractiveServices } from '../components/InteractiveServices';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { SEO } from '../components/SEO';
 import { TinyFAQ } from '../components/TinyFAQ';
 import { Hero3D } from '../components/Hero3D';
 import { InteractiveWorldMap } from '../components/InteractiveWorldMap';
@@ -28,6 +29,7 @@ const Home = () => {
 
     return (
         <AnimatedPage>
+            <SEO title="Digiton Home" canonicalUrl="/" />
             {/* More Normal but Premium Hero */}
             <section style={{ minHeight: '100vh', width: '100%', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '100px 5vw 0 5vw', justifyContent: 'center' }}>
                 <Hero3D />

@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin, Phone, MessageSquare } from 'lucide-react';
 import { DottedGlobe } from '../components/DottedGlobe';
+import { SEO } from '../components/SEO';
 
 const Contact = () => {
     return (
         <AnimatedPage>
-            <section className="hero-section container" style={{ minHeight: '60vh', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '4rem', paddingBottom: '4rem' }}>
+            <SEO title="Contact Digiton" canonicalUrl="/contact" />
+            <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '100px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                     <motion.div variants={fadeUpVariant} className="hero-badge" style={{ alignSelf: 'flex-start' }}>
                         <span className="label-mono">Contact</span>

@@ -2,8 +2,9 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Network, Bot, Database, BarChart3, Code2, Webhook, ArrowRight } from 'lucide-react';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { SEO } from '../components/SEO';
 
 const AITransformation = () => {
     const sectionRef = useRef(null);
@@ -32,6 +33,9 @@ const AITransformation = () => {
 
     return (
         <AnimatedPage>
+            <SEO title="AI Transformation Hub" canonicalUrl="/services/ai" />
+            
+            {/* HER0 */}
             <section style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '140px 2rem 0 2rem' }} className="container">
                 <motion.div variants={fadeUpVariant} style={{ maxWidth: '1200px' }}>
                     <h1 style={{ fontSize: 'clamp(4rem, 8vw, 8rem)', lineHeight: 1, letterSpacing: '-0.04em', textTransform: 'none', margin: 0 }}>

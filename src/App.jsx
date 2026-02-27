@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import Navbar from './components/Navbar';
@@ -18,6 +19,7 @@ import Contact from './pages/Contact';
 import Discovery from './pages/Discovery';
 import Academy from './pages/Academy';
 import NotFound from './pages/NotFound';
+import Admin from './pages/Admin';
 
 // ScrollToTop component
 const ScrollToTop = () => {
@@ -76,6 +78,9 @@ const AnimatedRoutes = () => {
         <Route path="/services/marketing/high-velocity-web" element={<HighVelocityWeb />} />
         <Route path="/services/marketing/content-engines" element={<ContentEngines />} />
 
+        {/* Admin Dashboard */}
+        <Route path="/admin" element={<Admin />} />
+
         {/* 404 Catch All */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -85,20 +90,22 @@ const AnimatedRoutes = () => {
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
 
-      <AnimatedBackground />
+        <AnimatedBackground />
 
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
-        <Navbar />
-        <main style={{ flexGrow: 1 }}>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-        <VoiceChat />
-      </div>
-    </Router>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+          <Navbar />
+          <main style={{ flexGrow: 1 }}>
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+          <VoiceChat />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { Link } from 'react-router-dom';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { Search, Share2, Mail, Layers, Zap, FileText, ArrowRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const Marketing = () => {
     const { scrollYProgress } = useScroll();
@@ -19,7 +21,9 @@ const Marketing = () => {
 
     return (
         <AnimatedPage>
-            {/* Striking Yellow Hero */}
+            <SEO title="Marketing Ecosystems" canonicalUrl="/services/marketing" />
+            
+            {/* HER0 */}
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '140px' }}>
                 <div style={{ position: 'absolute', inset: 0, background: 'var(--accent)', opacity: 0.05, zIndex: 0 }} />
                 <motion.div

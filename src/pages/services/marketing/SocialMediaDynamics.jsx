@@ -2,11 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
-import { Share2, Repeat, MessageCircle, BarChart2 } from 'lucide-react';
+import { Share2, Users, MessageSquare, Flame } from 'lucide-react';
+import { SEO } from '../../../components/SEO';
 
 const SocialMediaDynamics = () => {
     return (
         <AnimatedPage>
+            <SEO title="Social Media Dynamics" canonicalUrl="/services/marketing/social-dynamics" />
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: 0 }} />
 

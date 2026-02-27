@@ -1,28 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { AnimatedPage } from '../components/AnimatedPage';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { SEO } from '../components/SEO';
 
 const Discovery = () => {
     return (
-        <div style={{
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '8rem 2rem',
-            position: 'relative',
-            overflow: 'hidden'
-        }}>
-            {/* Background elements specific to the landing page feel */}
-            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(255,206,59,0.03) 0%, transparent 60%)', zIndex: 0 }} />
+        <AnimatedPage>
+            <SEO title="Start Discovery" canonicalUrl="/discovery" />
+            <div style={{
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '8rem 2rem',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
+                {/* Background elements specific to the landing page feel */}
+                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(255,206,59,0.03) 0%, transparent 60%)', zIndex: 0 }} />
 
-            <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '800px' }}>
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    style={{ textAlign: 'center', marginBottom: '4rem' }}
-                >
+                <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '800px' }}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        style={{ textAlign: 'center', marginBottom: '4rem' }}
+                    >
                     <span className="label-mono text-accent">Begin Transformation</span>
                     <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginTop: '1rem', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
                         Let's Engineer Your <br />
@@ -42,7 +46,8 @@ const Discovery = () => {
                     <LeadMagnetCTA embedded={true} />
                 </motion.div>
             </div>
-        </div>
+            </div>
+        </AnimatedPage>
     );
 };
 

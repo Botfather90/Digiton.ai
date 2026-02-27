@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
 import { Network, Zap, Cpu, ArrowRight } from 'lucide-react';
+import { WorkflowVis } from '../../../components/animations/WorkflowVis';
+import { SEO } from '../../../components/SEO';
 
 const WorkflowAutomation = () => {
     return (
         <AnimatedPage>
+            <SEO title="Workflow Automation" canonicalUrl="/services/ai/workflow-automation" />
             {/* HER0 */}
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 {/* Background Grid & Beams */}
@@ -47,9 +50,13 @@ const WorkflowAutomation = () => {
 
             {/* CAPABILITIES / BENTO GRID */}
             <section id="architecture" className="container" style={{ padding: '8rem 0' }}>
-                <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                     <span className="label-mono text-accent block mb-4">THE INFRASTRUCTURE</span>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.03em' }}>System <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Capabilities</span></h2>
+                </div>
+
+                <div style={{ marginBottom: '6rem' }}>
+                    <WorkflowVis />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem', gridAutoRows: 'minmax(300px, auto)' }}>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
-import { ArrowRight, X } from 'lucide-react';
+import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
+import { ArrowRight, X, Calendar, User, Tag } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const Blog = () => {
     const [selectedArticle, setSelectedArticle] = useState(null);
@@ -49,7 +51,8 @@ const Blog = () => {
 
     return (
         <AnimatedPage>
-            <section className="hero-section container" style={{ minHeight: '50vh', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '100px' }}>
+            <SEO title="Digiton Insights & Blog" canonicalUrl="/blog" />
+            <section style={{ minHeight: '90vh', padding: '120px 0 6rem 0', position: 'relative' }}>
                 <motion.div variants={fadeUpVariant} className="hero-badge" style={{ marginBottom: '2rem' }}>
                     <span className="label-mono">Insights</span>
                 </motion.div>

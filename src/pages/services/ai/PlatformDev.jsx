@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
 import { Code2, Smartphone, Blocks, Database } from 'lucide-react';
+import { PlatformVis } from '../../../components/animations/PlatformVis';
+import { SEO } from '../../../components/SEO';
 
 const PlatformDev = () => {
     return (
         <AnimatedPage>
+            <SEO title="Platform Development" canonicalUrl="/services/ai/platform-dev" />
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: 0 }} />
 
@@ -29,6 +32,10 @@ const PlatformDev = () => {
             </section>
 
             <section className="container" style={{ padding: '8rem 0' }}>
+                <div style={{ marginBottom: '6rem' }}>
+                    <PlatformVis />
+                </div>
+
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem', gridAutoRows: 'minmax(300px, auto)' }}>
 
                     <motion.div

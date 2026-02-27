@@ -90,7 +90,8 @@ export const VoiceChat = () => {
         const utterance = new SpeechSynthesisUtterance(text);
 
         const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(v => v.name.includes('Google') && v.lang.includes('en')) || voices[0];
+        // Try to pick a Portuguese or English voice, prefer Google/premium voices
+        const preferredVoice = voices.find(v => (v.lang.includes('pt') || v.lang.includes('en-GB') || v.lang.includes('en-US')) && v.name.includes('Google')) || voices.find(v => v.lang.includes('pt')) || voices[0];
         if (preferredVoice) utterance.voice = preferredVoice;
 
         utterance.rate = 1.0;
@@ -133,7 +134,7 @@ export const VoiceChat = () => {
             const genAI = new GoogleGenerativeAI(apiKey);
             const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-            const systemPrompt = "You are the Digiton Voice Assistant. You help users understand Digiton's AI transformation services, Academy, and engineering solutions. Be concise, professional, and slightly futuristic. Don't use heavy markdown formatting since your response might be spoken out loud.";
+            const systemPrompt = "You are the Digiton Voice Assistant. You help users understand Digiton's AI transformation services, Academy, and engineering solutions. Be concise, professional, and slightly futuristic. Don't use heavy markdown formatting since your response might be spoken out loud. You can speak English or Portuguese depending on the user's input language.";
 
             const prompt = `${systemPrompt}\n\nUser: ${textToSend}`;
             const result = await model.generateContent(prompt);

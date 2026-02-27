@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
 import { BarChart3, LineChart, PieChart, TrendingUp } from 'lucide-react';
+import { BIVis } from '../../../components/animations/BIVis';
+import { SEO } from '../../../components/SEO';
 
 const BusinessIntelligence = () => {
     return (
         <AnimatedPage>
+            <SEO title="Business Intelligence" canonicalUrl="/services/ai/business-intelligence" />
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: 0 }} />
 
@@ -29,6 +32,10 @@ const BusinessIntelligence = () => {
             </section>
 
             <section className="container" style={{ padding: '8rem 0' }}>
+                <div style={{ marginBottom: '6rem' }}>
+                    <BIVis />
+                </div>
+
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem', gridAutoRows: 'minmax(300px, auto)' }}>
 
                     <motion.div

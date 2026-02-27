@@ -2,11 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../../../components/AnimatedPage';
 import { LeadMagnetCTA } from '../../../components/LeadMagnetCTA';
-import { Search, TrendingUp, Target, BarChart, ArrowRight } from 'lucide-react';
+import { Search, Globe, TrendingUp, Target } from 'lucide-react';
+import { SEO } from '../../../components/SEO';
 
 const SEOOrganicGrowth = () => {
     return (
         <AnimatedPage>
+            <SEO title="SEO & Organic Growth" canonicalUrl="/services/marketing/seo-organic" />
             {/* HERO */}
             <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', overflow: 'hidden', paddingTop: '120px' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: 0 }} />
