@@ -4,7 +4,7 @@ import { MessageSquare, X, Mic, Send, Volume2, VolumeX, MicOff } from 'lucide-re
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Requires VITE_GEMINI_API_KEY in .env
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+const apiKey = 'AIzaSyCPF6wegBIU0V9B6FbXxGGQoY8yNKK74kU' || import.meta.env.VITE_GEMINI_API_KEY || '';
 // genAI is instantiated inside handleSend to prevent page crashes if key is missing
 
 
