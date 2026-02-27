@@ -2,20 +2,28 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { DottedGlobe } from '../components/DottedGlobe';
 
 const Contact = () => {
     return (
         <AnimatedPage>
-            <section className="hero-section container" style={{ minHeight: '60vh' }}>
-                <motion.div variants={fadeUpVariant} className="hero-badge">
-                    <span className="label-mono">Contact</span>
-                </motion.div>
+            <section className="hero-section container" style={{ minHeight: '60vh', display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center', gap: '4rem', paddingBottom: '4rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <motion.div variants={fadeUpVariant} className="hero-badge" style={{ alignSelf: 'flex-start' }}>
+                        <span className="label-mono">Contact</span>
+                    </motion.div>
 
-                <motion.div variants={fadeUpVariant} className="hero-content text-left" style={{ alignItems: 'flex-start', textAlign: 'left', maxWidth: '1000px', margin: '0' }}>
-                    <h1 style={{ textTransform: 'none' }}>Let's build<br /><span className="text-gradient">something great.</span></h1>
-                    <p className="hero-subhead mt-6" style={{ marginLeft: 0, maxWidth: '600px' }}>
-                        Whether you need AI automation, marketing strategy, or a complete digital transformation - we're ready to talk.
-                    </p>
+                    <motion.div variants={fadeUpVariant} className="hero-content text-left" style={{ alignItems: 'flex-start', textAlign: 'left', maxWidth: '600px', margin: '0' }}>
+                        <h1 style={{ textTransform: 'none', fontSize: 'clamp(3rem, 5vw, 4.5rem)' }}>Let's build<br /><span className="text-gradient">something great.</span></h1>
+                        <p className="hero-subhead mt-6" style={{ marginLeft: 0, maxWidth: '500px' }}>
+                            Whether you need AI automation, marketing strategy, or a complete digital transformation - we're ready to talk.
+                        </p>
+                    </motion.div>
+                </div>
+
+                <motion.div variants={fadeUpVariant} style={{ width: '100%', height: '400px', position: 'relative' }}>
+                    {/* The Globe Map */}
+                    <DottedGlobe />
                 </motion.div>
             </section>
 

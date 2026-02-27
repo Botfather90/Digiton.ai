@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { Chatbot } from './components/Chatbot';
+import { VoiceChat } from './components/VoiceChat';
 import { AnimatedBackground } from './components/AnimatedBackground';
 
 // Pages
@@ -76,7 +76,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
-        <Chatbot />
+        <VoiceChat />
       </div>
     </Router>
   );

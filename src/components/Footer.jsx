@@ -8,9 +8,11 @@ const Footer = () => {
                 <div className="footer-grid">
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <Link to="/" className="nav-logo">
-                            <div className="logo-icon">D</div>
-                            <span>digiton.ai</span>
+                        <Link to="/" className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+                            <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <img src="/logo.png" alt="Digiton Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                            </div>
+                            <span style={{ fontSize: '1.25rem', fontWeight: 600, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>digiton.ai</span>
                         </Link>
                         <p className="text-secondary" style={{ maxWidth: '280px', fontSize: '0.9rem' }}>
                             AI Transformation Venture Studio. Registered in Estonia (EU). Operations in Portugal, Angola, and UAE.

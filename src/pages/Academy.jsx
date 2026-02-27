@@ -11,7 +11,7 @@ const Academy = () => {
     return (
         <AnimatedPage>
             {/* POWERFUL HERO */}
-            <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '120px', position: 'relative', overflow: 'hidden' }}>
+            <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '200px', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', inset: 0, opacity: 0.5, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
                     <motion.div
                         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3], rotate: [0, 90, 0] }}
@@ -23,11 +23,22 @@ const Academy = () => {
                         transition={{ duration: 25, repeat: Infinity, ease: 'linear', delay: 2 }}
                         style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)', filter: 'blur(100px)' }}
                     />
-                    {/* Horizontal Beam Overlay */}
+                    {/* Horizontal Beams Overlay */}
                     <motion.div
                         animate={{ x: ['-200%', '200%'] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                        style={{ position: 'absolute', top: '30%', left: 0, width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent, rgba(255,206,59,0.8), transparent)', opacity: 0.8, zIndex: 0, boxShadow: '0 0 20px rgba(255,206,59,0.5)' }}
+                    />
+                    <motion.div
+                        animate={{ x: ['200%', '-200%'] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: 'linear', delay: 1 }}
+                        style={{ position: 'absolute', top: '70%', left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)', opacity: 0.5, zIndex: 0 }}
+                    />
+                    {/* Vertical Beam */}
+                    <motion.div
+                        animate={{ y: ['-200%', '200%'] }}
                         transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                        style={{ position: 'absolute', top: '50%', left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,206,59,0.3), transparent)', opacity: 0.5, zIndex: 0 }}
+                        style={{ position: 'absolute', left: '20%', top: 0, width: '1px', height: '100%', background: 'linear-gradient(180deg, transparent, rgba(255,206,59,0.5), transparent)', opacity: 0.6, zIndex: 0 }}
                     />
                 </div>
 
@@ -144,7 +155,16 @@ const Academy = () => {
             </section>
 
             {/* THE CURRICULUM */}
-            <section id="curriculum" className="container" style={{ padding: '10rem 0' }}>
+            <section id="curriculum" className="container" style={{ padding: '10rem 0', position: 'relative', zIndex: 1 }}>
+                {/* SVG Animated Connection Line */}
+                <div style={{ position: 'absolute', left: '50%', top: '25%', bottom: '15%', width: '2px', background: 'rgba(255,255,255,0.05)', zIndex: -1, transform: 'translateX(-50%)' }}>
+                    <motion.div
+                        animate={{ height: ['0%', '100%', '0%'], top: ['0%', '0%', '100%'] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                        style={{ position: 'absolute', width: '100%', background: 'var(--accent)', boxShadow: '0 0 15px var(--accent)' }}
+                    />
+                </div>
+
                 <div style={{ textAlign: 'center', marginBottom: '6rem', maxWidth: '800px', margin: '0 auto 6rem auto' }}>
                     <span className="label-mono text-accent block mb-4">THE FRAMEWORK</span>
                     <h2 style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', letterSpacing: '-0.03em', marginBottom: '2rem' }}>The Knowledge Blueprint.</h2>
