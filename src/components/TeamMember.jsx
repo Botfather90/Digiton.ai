@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Linkedin, Mail, ArrowRight } from 'lucide-react';
-import ReactDOM from 'react-dom';
 
 export const TeamMember = ({ name, role, description, image, links = {}, delay = 0 }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +86,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
 
             {/* Expanded Modal */}
             <AnimatePresence>
-                {isOpen && typeof document !== 'undefined' && ReactDOM.createPortal(
+                {isOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -99,7 +98,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                             background: 'rgba(4,4,5,0.8)',
                             backdropFilter: 'blur(20px)',
                             WebkitBackdropFilter: 'blur(20px)',
-                            zIndex: 99999, // Super high to be on top
+                            zIndex: 999,
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -119,9 +118,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                                 position: 'relative',
                                 display: 'grid',
                                 gridTemplateColumns: 'minmax(0, 1fr)',
-                                gap: '3rem',
-                                maxHeight: '90vh',
-                                overflowY: 'auto'
+                                gap: '3rem'
                             }}
                         >
                             <button
@@ -178,8 +175,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                             </div>
 
                         </motion.div>
-                    </motion.div>,
-                    document.body
+                    </motion.div>
                 )}
             </AnimatePresence>
         </>

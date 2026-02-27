@@ -12,14 +12,16 @@ export const InteractiveWorldMap = () => {
         { id: 'lisbon', label: 'Lisbon, PT', coordinates: [-9.1393, 38.7223] },
         { id: 'la', label: 'Los Angeles, US', coordinates: [-118.2437, 34.0522] },
         { id: 'angola', label: 'Luanda, AO', coordinates: [13.2343, -8.8390] },
-        { id: 'sa', label: 'Cape Town, ZA', coordinates: [18.4241, -33.9249] }
+        { id: 'sa', label: 'Cape Town, ZA', coordinates: [18.4241, -33.9249] },
+        { id: 'brazil', label: 'São Paulo, BR', coordinates: [-46.6333, -23.5505] },
+        { id: 'uae', label: 'Dubai, UAE', coordinates: [55.2708, 25.2048] }
     ];
 
     return (
         <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
             <ComposableMap
                 projection="geoMercator"
-                projectionConfig={{ scale: 120, center: [0, 20] }}
+                projectionConfig={{ scale: 150, center: [0, 20] }}
                 style={{ width: '100%', height: '100%' }}
             >
                 <Geographies geography={geoUrl}>

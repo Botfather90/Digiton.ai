@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { X, ArrowRight } from 'lucide-react';
-import ReactDOM from 'react-dom';
 
 const Work = () => {
     const { scrollYProgress } = useScroll();
@@ -228,8 +227,8 @@ const Work = () => {
 
             {/* Individual Project Modal */}
             <AnimatePresence>
-                {selectedProject && typeof document !== 'undefined' && ReactDOM.createPortal(
-                    <div style={{ position: 'fixed', inset: 0, zIndex: 99999, pointerEvents: 'none' }}>
+                {selectedProject && (
+                    <>
                         {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -237,13 +236,13 @@ const Work = () => {
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedProject(null)}
                             style={{
-                                position: 'absolute', inset: 0, background: 'rgba(10,10,12,0.9)',
-                                backdropFilter: 'blur(10px)', zIndex: 0, pointerEvents: 'auto'
+                                position: 'fixed', inset: 0, background: 'rgba(10,10,12,0.9)',
+                                backdropFilter: 'blur(10px)', zIndex: 100
                             }}
                         />
 
                         {/* Modal Container */}
-                        <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', pointerEvents: 'none' }}>
+                        <div style={{ position: 'fixed', inset: 0, zIndex: 101, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', pointerEvents: 'none' }}>
                             <motion.div
                                 layoutId={`project-${selectedProject.index}`}
                                 style={{
@@ -256,8 +255,7 @@ const Work = () => {
                                     maxHeight: '90vh',
                                     overflowY: 'auto',
                                     pointerEvents: 'auto',
-                                    position: 'relative',
-                                    boxShadow: '0 40px 100px rgba(0,0,0,0.5)'
+                                    position: 'relative'
                                 }}
                             >
                                 <button
@@ -333,8 +331,7 @@ const Work = () => {
                                 </div>
                             </motion.div>
                         </div>
-                    </div>,
-                    document.body
+                    </>
                 )}
             </AnimatePresence>
         </AnimatedPage>
