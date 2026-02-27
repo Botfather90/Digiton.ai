@@ -123,7 +123,7 @@ const Home = () => {
                         {[
                             { val: 200, prefix: "€", suffix: "K+", label: "Delivered Value" },
                             { val: 30, prefix: "", suffix: "+", label: "Global Clients" },
-                            { val: 15, prefix: "€", suffix: "K+", label: "Monthly Recurring Rev" },
+                            { val: 50, prefix: "", suffix: "+", label: "Automated Workflows" },
                             { val: 12, prefix: "", suffix: "", label: "Products Shipped" }
                         ].map((stat, idx) => (
                             <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
