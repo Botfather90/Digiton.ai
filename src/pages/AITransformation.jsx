@@ -15,12 +15,12 @@ const AITransformation = () => {
     const yAnim = useTransform(pageScroll, [0, 1], [0, -100]);
 
     const services = [
-        { title: 'Workflow Automation', body: 'End-to-end business process automation using n8n. We\'ve built 100+ custom workflows that eliminate manual tasks and connect your entire tech stack.', tags: ['n8n', 'API', 'Monitoring'] },
-        { title: 'Custom AI Agents', body: 'Intelligent agents that understand context, make decisions, and execute actions across your business tools. Connected to Slack, ClickUp, CRMs, and more.', tags: ['Agents', 'MCP', 'Autonomous'] },
-        { title: 'RAG & Knowledge', body: 'Transform your documents, transcripts, and data into queryable AI knowledge bases. Pinecone vector search with semantic understanding.', tags: ['Vector DB', 'Semantic Search'] },
-        { title: 'Business Intelligence', body: 'Real-time dashboards and automated reporting that turn raw data into actionable insights. From Klaviyo analytics to EV charging station monitoring.', tags: ['Dashboards', 'Pipelines'] },
-        { title: 'Platform Dev', body: 'Full-stack applications built with modern technologies. Flutter mobile apps, Next.js web platforms, Supabase/Firebase backends.', tags: ['Next.js', 'Flutter', 'Supabase'] },
-        { title: 'API & Integration', body: '50+ platform integrations orchestrated seamlessly. We connect the tools you already use into a unified, intelligent ecosystem.', tags: ['Webhooks', 'Event-Driven'] }
+        { title: 'Workflow Automation', body: 'End-to-end business process automation using n8n. We\'ve built 100+ custom workflows that eliminate manual tasks and connect your entire tech stack.', tags: ['n8n', 'API', 'Monitoring'], link: '/services/ai/workflow-automation' },
+        { title: 'Custom AI Agents', body: 'Intelligent agents that understand context, make decisions, and execute actions across your business tools. Connected to Slack, ClickUp, CRMs, and more.', tags: ['Agents', 'MCP', 'Autonomous'], link: '/services/ai/custom-agents' },
+        { title: 'RAG & Knowledge', body: 'Transform your documents, transcripts, and data into queryable AI knowledge bases. Pinecone vector search with semantic understanding.', tags: ['Vector DB', 'Semantic Search'], link: '/services/ai/rag-knowledge' },
+        { title: 'Business Intelligence', body: 'Real-time dashboards and automated reporting that turn raw data into actionable insights. From Klaviyo analytics to EV charging station monitoring.', tags: ['Dashboards', 'Pipelines'], link: '/services/ai/business-intelligence' },
+        { title: 'Platform Dev', body: 'Full-stack applications built with modern technologies. Flutter mobile apps, Next.js web platforms, Supabase/Firebase backends.', tags: ['Next.js', 'Flutter', 'Supabase'], link: '/services/ai/platform-dev' },
+        { title: 'API & Integration', body: '50+ platform integrations orchestrated seamlessly. We connect the tools you already use into a unified, intelligent ecosystem.', tags: ['Webhooks', 'Event-Driven'], link: '/services/ai/api-integration' }
     ];
 
     const processSteps = [
@@ -51,40 +51,40 @@ const AITransformation = () => {
                             const colSpan = idx < 2 ? 'span 6' : 'span 4';
 
                             return (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    style={{
-                                        gridColumn: colSpan,
-                                        background: idx === 1 ? 'var(--accent)' : 'rgba(255,255,255,0.02)',
-                                        border: `1px solid ${idx === 1 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)'}`,
-                                        borderRadius: '32px',
-                                        padding: '3rem',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        position: 'relative',
-                                        overflow: 'hidden'
-                                    }}
-                                    className={`group ${idx !== 1 ? 'hover:border-accent/40' : ''} transition-colors`}
-                                >
-                                    {/* Removed flashing border animation based on feedback */}
-                                    <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
-                                        {service.tags.map((tag, i) => (
-                                            <span key={i} className="label-mono" style={{ color: idx === 1 ? 'var(--bg-primary)' : 'var(--accent)', background: idx === 1 ? 'rgba(0,0,0,0.1)' : 'rgba(255,206,59,0.05)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.85rem', fontWeight: idx === 1 ? '600' : 'normal' }}>
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <h3 style={{ fontSize: '2rem', letterSpacing: '-0.02em', margin: '0 0 1.5rem 0', transition: 'color 0.2s', color: idx === 1 ? 'var(--bg-primary)' : 'var(--text-primary)', position: 'relative', zIndex: 1 }} className={idx !== 1 ? 'group-hover:text-accent' : ''}>
-                                        {service.title}
-                                    </h3>
-                                    <p style={{ fontSize: '1.1rem', color: idx === 1 ? 'rgba(0,0,0,0.7)' : 'var(--text-secondary)', lineHeight: 1.6, flexGrow: 1, margin: 0, position: 'relative', zIndex: 1, fontWeight: idx === 1 ? '500' : 'normal' }}>
-                                        {service.body}
-                                    </p>
-                                </motion.div>
+                                <Link to={service.link} key={idx} style={{ gridColumn: colSpan, display: 'block', textDecoration: 'none' }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
+                                        viewport={{ once: true, margin: "-50px" }}
+                                        style={{
+                                            background: idx === 1 ? 'var(--accent)' : 'rgba(255,255,255,0.02)',
+                                            border: `1px solid ${idx === 1 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)'}`,
+                                            borderRadius: '32px',
+                                            padding: '3rem',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            position: 'relative',
+                                            overflow: 'hidden',
+                                            height: '100%'
+                                        }}
+                                        className={`group ${idx !== 1 ? 'hover:border-accent/40' : ''} transition-colors`}
+                                    >
+                                        <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem', flexWrap: 'wrap', position: 'relative', zIndex: 1 }}>
+                                            {service.tags.map((tag, i) => (
+                                                <span key={i} className="label-mono" style={{ color: idx === 1 ? 'var(--bg-primary)' : 'var(--accent)', background: idx === 1 ? 'rgba(0,0,0,0.1)' : 'rgba(255,206,59,0.05)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.85rem', fontWeight: idx === 1 ? '600' : 'normal' }}>
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <h3 style={{ fontSize: '2rem', letterSpacing: '-0.02em', margin: '0 0 1.5rem 0', transition: 'color 0.2s', color: idx === 1 ? 'var(--bg-primary)' : 'var(--text-primary)', position: 'relative', zIndex: 1 }} className={idx !== 1 ? 'group-hover:text-accent' : ''}>
+                                            {service.title} <ChevronRight style={{ display: 'inline-block', verticalAlign: 'middle', marginLeft: '0.5rem', opacity: 0.5 }} />
+                                        </h3>
+                                        <p style={{ fontSize: '1.1rem', color: idx === 1 ? 'rgba(0,0,0,0.7)' : 'var(--text-secondary)', lineHeight: 1.6, flexGrow: 1, margin: 0, position: 'relative', zIndex: 1, fontWeight: idx === 1 ? '500' : 'normal' }}>
+                                            {service.body}
+                                        </p>
+                                    </motion.div>
+                                </Link>
                             );
                         })}
                     </div>

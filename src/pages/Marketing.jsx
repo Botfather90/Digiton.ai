@@ -9,12 +9,12 @@ const Marketing = () => {
     const yAnim = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
     const services = [
-        { title: 'SEO & Organic Growth', body: 'Data-driven SEO strategies that delivered 1844% traffic increases. Technical optimization, content strategy, and link building powered by AI analysis.', highlight: '1844% Traffic Increase' },
-        { title: 'Social Media Dynamics', body: 'Hyper-targeted paid and organic social campaigns. We build automated funnels that convert attention into revenue across Meta, LinkedIn, and TikTok.', highlight: 'Multi-channel Automation' },
-        { title: 'Intelligent Lifecycle', body: 'Predictive email flows. We use AI to segment audiences, predict churn, and craft personalized emails that generate consistent ROI.', highlight: 'Predictive Segmentation' },
-        { title: 'Brand Architecture', body: 'Premium visual identities that command authority in your market. From logo design to complete brand guidelines and digital presence.', highlight: 'Premium Positioning' },
-        { title: 'High-Velocity Web', body: 'High-performance websites built for conversion. Awwwards-winning aesthetics combined with lightning-fast modern tech stacks.', highlight: 'Conversion-Optimized' },
-        { title: 'Content Engines', body: 'AI-assisted content engines that produce high-quality, authoritative pieces at scale. Blogs, whitepapers, social copy, and video scripts.', highlight: 'Scale + Quality' }
+        { title: 'SEO & Organic Growth', body: 'Data-driven SEO strategies that delivered 1844% traffic increases. Technical optimization, content strategy, and link building powered by AI analysis.', highlight: '1844% Traffic Increase', link: '/services/marketing/seo-organic' },
+        { title: 'Social Media Dynamics', body: 'Hyper-targeted paid and organic social campaigns. We build automated funnels that convert attention into revenue across Meta, LinkedIn, and TikTok.', highlight: 'Multi-channel Automation', link: '/services/marketing/social-dynamics' },
+        { title: 'Intelligent Lifecycle', body: 'Predictive email flows. We use AI to segment audiences, predict churn, and craft personalized emails that generate consistent ROI.', highlight: 'Predictive Segmentation', link: '/services/marketing/intelligent-lifecycle' },
+        { title: 'Brand Architecture', body: 'Premium visual identities that command authority in your market. From logo design to complete brand guidelines and digital presence.', highlight: 'Premium Positioning', link: '/services/marketing/brand-architecture' },
+        { title: 'High-Velocity Web', body: 'High-performance websites built for conversion. Awwwards-winning aesthetics combined with lightning-fast modern tech stacks.', highlight: 'Conversion-Optimized', link: '/services/marketing/high-velocity-web' },
+        { title: 'Content Engines', body: 'AI-assisted content engines that produce high-quality, authoritative pieces at scale. Blogs, whitepapers, social copy, and video scripts.', highlight: 'Scale + Quality', link: '/services/marketing/content-engines' }
     ];
 
     return (
@@ -74,46 +74,46 @@ const Marketing = () => {
                             if (idx === 5) colSpan = 'span 8';
 
                             return (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-                                    viewport={{ once: true, margin: "-50px" }}
-                                    style={{
-                                        gridColumn: colSpan,
-                                        background: idx % 3 === 0 ? 'var(--accent)' : 'rgba(255,255,255,0.02)',
-                                        color: idx % 3 === 0 ? 'var(--bg-primary)' : 'var(--text-primary)',
-                                        border: idx % 3 === 0 ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.05)',
-                                        borderRadius: '32px',
-                                        padding: '3rem',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'space-between',
-                                        position: 'relative',
-                                        overflow: 'hidden'
-                                    }}
-                                    className={`group hover:scale-[1.02] transition-transform duration-500`}
-                                >
-                                    {/* Removed flashing border animation based on feedback */}
-                                    <div>
-                                        <div className="label-mono" style={{
-                                            marginBottom: '2rem',
-                                            display: 'inline-block',
-                                            padding: '0.4rem 1rem',
-                                            borderRadius: '100px',
-                                            background: idx % 3 === 0 ? 'rgba(0,0,0,0.1)' : 'rgba(255,206,59,0.1)',
-                                            color: idx % 3 === 0 ? 'var(--bg-primary)' : 'var(--accent)',
-                                            fontWeight: 600
-                                        }}>
-                                            {service.highlight}
+                                <Link to={service.link} key={idx} style={{ gridColumn: colSpan, display: 'block', textDecoration: 'none' }}>
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
+                                        viewport={{ once: true, margin: "-50px" }}
+                                        style={{
+                                            background: idx % 3 === 0 ? 'var(--accent)' : 'rgba(255,255,255,0.02)',
+                                            color: idx % 3 === 0 ? 'var(--bg-primary)' : 'var(--text-primary)',
+                                            border: idx % 3 === 0 ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.05)',
+                                            borderRadius: '32px',
+                                            padding: '3rem',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'space-between',
+                                            position: 'relative',
+                                            overflow: 'hidden',
+                                            height: '100%'
+                                        }}
+                                        className={`group hover:scale-[1.02] transition-transform duration-500`}
+                                    >
+                                        <div>
+                                            <div className="label-mono" style={{
+                                                marginBottom: '2rem',
+                                                display: 'inline-block',
+                                                padding: '0.4rem 1rem',
+                                                borderRadius: '100px',
+                                                background: idx % 3 === 0 ? 'rgba(0,0,0,0.1)' : 'rgba(255,206,59,0.1)',
+                                                color: idx % 3 === 0 ? 'var(--bg-primary)' : 'var(--accent)',
+                                                fontWeight: 600
+                                            }}>
+                                                {service.highlight}
+                                            </div>
+                                            <h3 style={{ fontSize: 'clamp(2rem, 3vw, 2.5rem)', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1 }}>{service.title}</h3>
                                         </div>
-                                        <h3 style={{ fontSize: 'clamp(2rem, 3vw, 2.5rem)', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1 }}>{service.title}</h3>
-                                    </div>
-                                    <div style={{ marginTop: '2rem' }}>
-                                        <p style={{ fontSize: '1.1rem', color: idx % 3 === 0 ? 'rgba(0,0,0,0.7)' : 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{service.body}</p>
-                                    </div>
-                                </motion.div>
+                                        <div style={{ marginTop: '2rem' }}>
+                                            <p style={{ fontSize: '1.1rem', color: idx % 3 === 0 ? 'rgba(0,0,0,0.7)' : 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>{service.body}</p>
+                                        </div>
+                                    </motion.div>
+                                </Link>
                             )
                         })}
                     </div>

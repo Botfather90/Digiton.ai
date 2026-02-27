@@ -27,13 +27,21 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Service Pages
-import AIEmployees from './pages/services/AIEmployees';
-import AutomationWorkflows from './pages/services/AutomationWorkflows';
-import PlatformDevelopment from './pages/services/PlatformDevelopment';
-import FractionalCTO from './pages/services/FractionalCTO';
-import MarketingAutomation from './pages/services/MarketingAutomation';
-import Web3Development from './pages/services/Web3Development';
+// AI Transformation Service Pages
+import WorkflowAutomation from './pages/services/ai/WorkflowAutomation';
+import CustomAIAgents from './pages/services/ai/CustomAIAgents';
+import RAGKnowledge from './pages/services/ai/RAGKnowledge';
+import BusinessIntelligence from './pages/services/ai/BusinessIntelligence';
+import PlatformDev from './pages/services/ai/PlatformDev';
+import APIIntegration from './pages/services/ai/APIIntegration';
+
+// Marketing Service Pages
+import SEOOrganicGrowth from './pages/services/marketing/SEOOrganicGrowth';
+import SocialMediaDynamics from './pages/services/marketing/SocialMediaDynamics';
+import IntelligentLifecycle from './pages/services/marketing/IntelligentLifecycle';
+import BrandArchitecture from './pages/services/marketing/BrandArchitecture';
+import HighVelocityWeb from './pages/services/marketing/HighVelocityWeb';
+import ContentEngines from './pages/services/marketing/ContentEngines';
 
 // AnimatedRoutes wrapper for framer-motion exit animations
 const AnimatedRoutes = () => {
@@ -51,13 +59,21 @@ const AnimatedRoutes = () => {
         <Route path="/discovery" element={<Discovery />} />
         <Route path="/academy" element={<Academy />} />
 
-        {/* Service Routes */}
-        <Route path="/services/ai-employees" element={<AIEmployees />} />
-        <Route path="/services/automation-workflows" element={<AutomationWorkflows />} />
-        <Route path="/services/platform-development" element={<PlatformDevelopment />} />
-        <Route path="/services/fractional-cto" element={<FractionalCTO />} />
-        <Route path="/services/marketing-automation" element={<MarketingAutomation />} />
-        <Route path="/services/web3" element={<Web3Development />} />
+        {/* AI Transformation Hub */}
+        <Route path="/services/ai/workflow-automation" element={<WorkflowAutomation />} />
+        <Route path="/services/ai/custom-agents" element={<CustomAIAgents />} />
+        <Route path="/services/ai/rag-knowledge" element={<RAGKnowledge />} />
+        <Route path="/services/ai/business-intelligence" element={<BusinessIntelligence />} />
+        <Route path="/services/ai/platform-dev" element={<PlatformDev />} />
+        <Route path="/services/ai/api-integration" element={<APIIntegration />} />
+
+        {/* Marketing Hub */}
+        <Route path="/services/marketing/seo-organic" element={<SEOOrganicGrowth />} />
+        <Route path="/services/marketing/social-dynamics" element={<SocialMediaDynamics />} />
+        <Route path="/services/marketing/intelligent-lifecycle" element={<IntelligentLifecycle />} />
+        <Route path="/services/marketing/brand-architecture" element={<BrandArchitecture />} />
+        <Route path="/services/marketing/high-velocity-web" element={<HighVelocityWeb />} />
+        <Route path="/services/marketing/content-engines" element={<ContentEngines />} />
       </Routes>
     </AnimatePresence>
   );
