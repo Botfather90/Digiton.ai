@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { AnimatedPage } from '../components/AnimatedPage';
 import { ChevronRight, TerminalSquare, CheckCircle2, ArrowRight } from 'lucide-react';
@@ -11,8 +11,10 @@ import { InteractiveServices } from '../components/InteractiveServices';
 import { LeadMagnetCTA } from '../components/LeadMagnetCTA';
 import { TinyFAQ } from '../components/TinyFAQ';
 import { Hero3D } from '../components/Hero3D';
+import { InteractiveWorldMap } from '../components/InteractiveWorldMap';
 
 const Home = () => {
+    const navigate = useNavigate();
     const { scrollYProgress } = useScroll();
     const scaleAnim = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.2]);
     const yAnim = useTransform(scrollYProgress, [0, 1], [100, -100]);
@@ -123,7 +125,7 @@ const Home = () => {
                         {[
                             { val: 200, prefix: "€", suffix: "K+", label: "Delivered Value" },
                             { val: 30, prefix: "", suffix: "+", label: "Global Clients" },
-                            { val: 50, prefix: "", suffix: "+", label: "Automated Workflows" },
+                            { val: 100, prefix: "", suffix: "+", label: "Automated Workflows" },
                             { val: 12, prefix: "", suffix: "", label: "Products Shipped" }
                         ].map((stat, idx) => (
                             <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
@@ -169,6 +171,7 @@ const Home = () => {
                                 minHeight: '400px',
                                 cursor: 'pointer'
                             }}
+                            onClick={() => navigate('/work')}
                         >
                             {/* Hover Beam Effect */}
                             <motion.div
@@ -315,42 +318,8 @@ const Home = () => {
                         </div>
 
                         {/* Interactive Map Visualization */}
-                        <div style={{ position: 'relative', aspectRatio: '16/10', background: 'rgba(255,255,255,0.02)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
-                            <svg width="100%" height="100%" viewBox="0 0 1000 500" style={{ position: 'absolute', opacity: 0.1, fill: 'var(--text-secondary)', stroke: 'rgba(255,255,255,0.1)', strokeWidth: 1, strokeLinejoin: 'round' }}>
-                                {/* Stylized Continental Map Paths */}
-                                <path d="M 150 50 Q 250 50 280 120 T 220 250 Q 150 200 120 150 Z" /> {/* NA */}
-                                <path d="M 230 250 Q 300 280 280 450 Q 230 400 210 300 Z" /> {/* SA */}
-                                <path d="M 450 60 Q 550 50 580 100 Q 550 140 450 120 Z" /> {/* EU */}
-                                <path d="M 440 140 Q 560 150 530 350 Q 450 320 420 200 Z" /> {/* AF */}
-                                <path d="M 580 60 Q 800 30 850 150 Q 750 250 620 150 Z" /> {/* AS */}
-                                <path d="M 750 300 Q 850 300 850 380 Q 750 380 720 340 Z" /> {/* AU */}
-                            </svg>
-
-                            {/* Define absolute locations based on the stylized path */
-                                [
-                                    { id: 'estonia', label: 'Tallinn, EE', x: 53, y: 22 },
-                                    { id: 'uk', label: 'London, UK', x: 47, y: 24 },
-                                    { id: 'lisbon', label: 'Lisbon, PT', x: 44, y: 31 },
-                                    { id: 'la', label: 'Los Angeles, US', x: 16, y: 38 },
-                                    { id: 'angola', label: 'Luanda, AO', x: 48, y: 62 },
-                                    { id: 'sa', label: 'Cape Town, ZA', x: 51, y: 82 }
-                                ].map((loc, idx) => (
-                                    <motion.div
-                                        key={loc.id}
-                                        style={{ position: 'absolute', top: `${loc.y}%`, left: `${loc.x}%`, zIndex: 10 }}
-                                        whileHover={{ scale: 1.2, zIndex: 20 }}
-                                    >
-                                        <motion.div animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 3, repeat: Infinity, delay: idx * 0.4 }} style={{ width: '12px', height: '12px', background: 'var(--accent)', borderRadius: '50%', boxShadow: '0 0 20px var(--accent)', cursor: 'pointer' }} />
-                                        {/* Tooltip */}
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            whileHover={{ opacity: 1, y: 0 }}
-                                            style={{ position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)', background: 'rgba(10,10,12,0.9)', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(255,206,59,0.3)', whiteSpace: 'nowrap', pointerEvents: 'none', fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 500 }}
-                                        >
-                                            {loc.label}
-                                        </motion.div>
-                                    </motion.div>
-                                ))}
+                        <div style={{ position: 'relative', aspectRatio: '16/9', background: 'rgba(255,255,255,0.02)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+                            <InteractiveWorldMap />
                         </div>
                     </div>
                 </div>

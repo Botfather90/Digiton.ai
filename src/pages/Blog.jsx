@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
 import { ArrowRight, X } from 'lucide-react';
+import ReactDOM from 'react-dom';
 
 const Blog = () => {
     const [selectedArticle, setSelectedArticle] = useState(null);
@@ -120,19 +121,19 @@ const Blog = () => {
             </section>
 
             <AnimatePresence>
-                {selectedArticle && (
-                    <>
+                {selectedArticle && typeof document !== 'undefined' && ReactDOM.createPortal(
+                    <div style={{ position: 'fixed', inset: 0, zIndex: 99999, pointerEvents: 'none' }}>
                         {/* Overlay backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedArticle(null)}
-                            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', zIndex: 100, pointerEvents: 'auto' }}
+                            style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)', zIndex: 0, pointerEvents: 'auto' }}
                         />
 
                         {/* Modal Container */}
-                        <div style={{ position: 'fixed', inset: 0, zIndex: 101, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem 2rem 2rem 2rem', pointerEvents: 'none', overflowY: 'auto' }}>
+                        <div style={{ position: 'absolute', inset: 0, zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '4rem 2rem 2rem 2rem', pointerEvents: 'none', overflowY: 'auto' }}>
                             <motion.div
                                 layoutId={`article-${selectedArticle.index}`}
                                 style={{
@@ -196,7 +197,8 @@ const Blog = () => {
                                 </div>
                             </motion.div>
                         </div>
-                    </>
+                    </div>,
+                    document.body
                 )}
             </AnimatePresence>
 

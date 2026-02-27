@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Linkedin, Mail, ArrowRight } from 'lucide-react';
+import ReactDOM from 'react-dom';
 
 export const TeamMember = ({ name, role, description, image, links = {}, delay = 0 }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,9 +34,27 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                 className="group hover:border-accent/40 hover:bg-glass-bg transition-all duration-500"
             >
                 {/* Abstract Top Right Gradient */}
-                <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '60%', background: 'radial-gradient(circle at top right, rgba(255,206,59,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '60%', background: 'radial-gradient(circle at top right, rgba(255,206,59,0.05) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                {/* Hover Beam Effect */}
+                <motion.div
+                    variants={{
+                        initial: { x: '-100%', opacity: 0 },
+                        hover: { x: '250%', opacity: 1 }
+                    }}
+                    transition={{ duration: 1.5, ease: "linear", repeat: Infinity, repeatDelay: 1 }}
+                    style={{
+                        position: 'absolute',
+                        top: 0, bottom: 0, left: 0,
+                        width: '30%',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,206,59,0.15) 50%, transparent 100%)',
+                        transform: 'skewX(-20deg)',
+                        zIndex: 1,
+                        pointerEvents: 'none'
+                    }}
+                />
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 2 }}>
                     {/* Avatar */}
                     <div style={{
                         width: '60px', height: '60px', borderRadius: '50%',
@@ -68,7 +87,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
 
             {/* Expanded Modal */}
             <AnimatePresence>
-                {isOpen && (
+                {isOpen && typeof document !== 'undefined' && ReactDOM.createPortal(
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -80,7 +99,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                             background: 'rgba(4,4,5,0.8)',
                             backdropFilter: 'blur(20px)',
                             WebkitBackdropFilter: 'blur(20px)',
-                            zIndex: 999,
+                            zIndex: 99999, // Super high to be on top
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -100,7 +119,9 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                                 position: 'relative',
                                 display: 'grid',
                                 gridTemplateColumns: 'minmax(0, 1fr)',
-                                gap: '3rem'
+                                gap: '3rem',
+                                maxHeight: '90vh',
+                                overflowY: 'auto'
                             }}
                         >
                             <button
@@ -157,7 +178,8 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                             </div>
 
                         </motion.div>
-                    </motion.div>
+                    </motion.div>,
+                    document.body
                 )}
             </AnimatePresence>
         </>
