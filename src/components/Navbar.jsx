@@ -47,7 +47,7 @@ const Navbar = () => {
                     }}
                 />
 
-                <Link to="/" className="nav-logo" style={{ marginRight: '1rem', position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                <Link to="/" className="nav-logo" style={{ marginLeft: '1rem', marginRight: '1rem', position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                     <img src="/logo.png" alt="Digiton Logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
                 </Link>
 

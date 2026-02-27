@@ -15,7 +15,7 @@ const About = () => {
         { year: '2018', event: 'Founded as AI Marketing Agency', desc: 'Started with SEO, social media, and content marketing. Building the foundation of digital marketing expertise.' },
         { year: '2023', event: 'AI Integration Begins', desc: 'Started integrating AI tools into marketing workflows. First automation projects with n8n and custom APIs.' },
         { year: '2024', event: 'Venture Studio Evolution', desc: 'Formal pivot to AI Transformation Venture Studio. Registered Digiton Dynamics OÜ in Estonia. Expanded to 30+ clients.' },
-        { year: '2025', event: 'Government & Enterprise', desc: 'Landed Angola government partnership (HSA Archive). Enterprise clients like Chazemo EV (586+ stations). €200K+ delivered value.' },
+        { year: '2025', event: 'Government & Enterprise', desc: 'Landed Angola government partnership (HSA Archive). Enterprise clients like Chazemo EV (586+ stations). Massive delivered value.' },
         { year: '2026', event: 'Global Expansion', desc: 'UAE market entry. Series A preparation. Building the next generation of AI-powered business infrastructure.' }
     ];
 
@@ -109,7 +109,7 @@ const About = () => {
                         </motion.div>
                         <motion.div variants={fadeUpVariant} transition={{ delay: 0.1 }}>
                             <div className="label-mono text-accent mb-4">Total ROI Generated</div>
-                            <div style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', fontWeight: 600, letterSpacing: '-0.05em', color: 'var(--text-primary)' }}>€1.2M+</div>
+                            <div style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', fontWeight: 600, letterSpacing: '-0.05em', color: 'var(--text-primary)' }}>Massive</div>
                         </motion.div>
                         <motion.div variants={fadeUpVariant} transition={{ delay: 0.2 }}>
                             <div className="label-mono text-accent mb-4">Global Presence</div>

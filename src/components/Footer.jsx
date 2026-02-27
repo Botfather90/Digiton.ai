@@ -43,7 +43,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>© 2026 Digiton Dynamics OÜ. All rights reserved. | Registry: 17385234 | Estonia (EU)</p>
+                    <p>© 2026 Digiton Dynamics OÜ. All rights reserved. | Estonia (EU)</p>
                 </div>
             </div>
         </footer>

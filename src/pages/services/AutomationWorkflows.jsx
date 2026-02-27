@@ -5,7 +5,7 @@ const AutomationWorkflows = () => {
     const data = {
         title: "Automation Workflows",
         subtitle: "Connect your tools and kill manual work. Average client saves 42.5 hours/week.",
-        price: "€3,000/mo",
+        
         description: "If it has an API, we can automate it. We build robust, error-proof pipelines using natively hosted n8n, Make, Zapier, and custom scripts to force disparate SaaS tools to talk to each other so your human team doesn't have to.",
         features: [
             { title: "n8n Architecture", desc: "Self-hosted, cost-effective automation pipelines connecting 100+ tools seamlessly." },

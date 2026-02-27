@@ -235,8 +235,8 @@ const Academy = () => {
 
                             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                                 <div>
-                                    <span className="label-mono text-secondary block mb-1">Registration Fee</span>
-                                    <span style={{ fontSize: '2.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>€200</span>
+                                    <span className="label-mono text-secondary block mb-1">Registration</span>
+                                    <span style={{ fontSize: '1.5rem', fontWeight: 500, color: 'var(--text-primary)' }}>Join Waitlist</span>
                                 </div>
                                 <a href="https://calendly.com/digiton/webinar" target="_blank" rel="noreferrer" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
                                     Secure Your Seat

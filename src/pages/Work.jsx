@@ -26,7 +26,7 @@ const Work = () => {
                     'Google reviews: 3.8 → 4.6 stars',
                     'Zero missed calls (previously 30%+ went to voicemail)'
                 ],
-                metric: '€3,800/mo Retainer'
+                metric: 'Continuous Retainer'
             }
         },
         {
@@ -46,13 +46,13 @@ const Work = () => {
                     'Newsletter research automated (was 2hrs, now 5 minutes)',
                     'Zero missed campaign deadlines since deployment'
                 ],
-                metric: '€35,000+ Investment'
+                metric: 'Funding Secured'
             }
         },
         {
             client: 'Chazemo EV',
             industry: 'EV Infrastructure',
-            desc: 'Business intelligence platform for EV charging stations across Portugal. Replaced legacy software. Automated subscription management for 600+ clients and Moloni invoicing. €14,280 in uncollected revenue recovered.',
+            desc: 'Business intelligence platform for EV charging stations across Portugal. Replaced legacy software. Automated subscription management for 600+ clients and Moloni invoicing. Significant uncollected revenue recovered.',
             details: {
                 problem: 'New company entering Portuguese EV market. Needed brand identity, technical platform, and market positioning against incumbents.',
                 solution: [
@@ -86,7 +86,7 @@ const Work = () => {
                     '10x digitization speed',
                     'Government contract secured'
                 ],
-                metric: '€9,500 MVP'
+                metric: 'MVP Deployment'
             }
         },
         {

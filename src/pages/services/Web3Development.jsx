@@ -5,7 +5,7 @@ const Web3Development = () => {
     const data = {
         title: "Web3 Development",
         subtitle: "Move smart contracts (Sui/Aptos), DeFi protocols, NFT platforms. We live here.",
-        price: "Project-based",
+        
         description: "We are deeply embedded in the next-generation blockchain ecosystem. From developing highly secure Move smart contracts to building seamless Web3 authentication systems, we handle the extreme technical complexity of decentralized applications.",
         features: [
             { title: "Move Smart Contracts", desc: "Developing secure, highly parallelized logic for the Sui and Aptos ecosystems." },

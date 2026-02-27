@@ -109,12 +109,12 @@ const Home = () => {
                 </div>
 
                 <InteractiveServices services={[
-                    { title: "AI Employees", price: "€2,000/mo", desc: "Your next hire isn't human. AI agents that handle reception, booking, follow-ups, and reporting - 24/7. No sick days. No onboarding.", path: "/services/ai-employees" },
-                    { title: "Automation Workflows", price: "€3,000/mo", desc: "We connect your tools and kill your manual work. n8n, Make.com, Zapier, Supabase. Average client saves 42.5 hours/week.", path: "/services/automation-workflows" },
-                    { title: "Full Platform Development", price: "€4,000/mo", desc: "React, Next.js, Python, Flutter. We build the app, dashboard, or platform your business needs. From MVP to production in weeks.", path: "/services/platform-development" },
-                    { title: "Fractional CTO", price: "€5,000/mo", desc: "Need technical leadership without the £150K salary? Architecture decisions, team management, code reviews. Cancel anytime.", path: "/services/fractional-cto" },
-                    { title: "Marketing Automation", price: "€2,000/mo", desc: "Klaviyo flows, email sequences, social media systems, content repurposing, AI campaigns. Your marketing runs itself.", path: "/services/marketing-automation" },
-                    { title: "Web3 Development", price: "Project-based", desc: "Move smart contracts (Sui/Aptos), DeFi protocols, NFT platforms, blockchain auth. 14 grant applications across 10+ chains.", path: "/services/web3" }
+                    { title: "AI Employees", desc: "Your next hire isn't human. AI agents that handle reception, booking, follow-ups, and reporting - 24/7. No sick days. No onboarding.", path: "/services/ai-employees" },
+                    { title: "Automation Workflows", desc: "We connect your tools and kill your manual work. n8n, Make.com, Zapier, Supabase. Average client saves 42.5 hours/week.", path: "/services/automation-workflows" },
+                    { title: "Full Platform Development", desc: "React, Next.js, Python, Flutter. We build the app, dashboard, or platform your business needs. From MVP to production in weeks.", path: "/services/platform-development" },
+                    { title: "Fractional CTO", desc: "Need technical leadership without the £150K salary? Architecture decisions, team management, code reviews. Cancel anytime.", path: "/services/fractional-cto" },
+                    { title: "Marketing Automation", desc: "Klaviyo flows, email sequences, social media systems, content repurposing, AI campaigns. Your marketing runs itself.", path: "/services/marketing-automation" },
+                    { title: "Web3 Development", desc: "Move smart contracts (Sui/Aptos), DeFi protocols, NFT platforms, blockchain auth. 14 grant applications across 10+ chains.", path: "/services/web3" }
                 ]} />
             </section>
 
@@ -123,7 +123,7 @@ const Home = () => {
                 <div className="container">
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', textAlign: 'center' }}>
                         {[
-                            { val: 200, prefix: "€", suffix: "K+", label: "Delivered Value" },
+                            { val: 10, prefix: "", suffix: "x", label: "ROI Average" },
                             { val: 30, prefix: "", suffix: "+", label: "Global Clients" },
                             { val: 100, prefix: "", suffix: "+", label: "Automated Workflows" },
                             { val: 12, prefix: "", suffix: "", label: "Products Shipped" }
