@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedPage, fadeUpVariant } from '../components/AnimatedPage';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, X } from 'lucide-react';
 import { SEO } from '../components/SEO';
 
 const Work = () => {
-    const { scrollYProgress } = useScroll();
     const [selectedProject, setSelectedProject] = useState(null);
 
     const projects = [
@@ -175,53 +174,130 @@ const Work = () => {
     return (
         <AnimatedPage>
             <SEO title="Our Work & Case Studies" canonicalUrl="/work" />
-            <section style={{ minHeight: '90vh', padding: '120px 0 6rem 0', position: 'relative' }} className="container">
+
+            {/* Hero */}
+            <section style={{ minHeight: '80vh', padding: '120px 0 4rem 0', position: 'relative', overflow: 'hidden' }} className="container">
+                {/* Floating particles */}
+                {[...Array(8)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        animate={{
+                            y: [0, -40, 0],
+                            opacity: [0.1, 0.4, 0.1]
+                        }}
+                        transition={{ duration: 5 + i, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
+                        style={{
+                            position: 'absolute',
+                            width: '3px', height: '3px', borderRadius: '50%',
+                            background: 'var(--accent)',
+                            left: `${10 + i * 11}%`,
+                            top: `${20 + (i % 4) * 15}%`,
+                            pointerEvents: 'none'
+                        }}
+                    />
+                ))}
+
                 <motion.div variants={fadeUpVariant} style={{ maxWidth: '1200px' }}>
-                    <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: 0.9, letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
-                        Artifacts<br />of <span className="text-secondary" style={{ fontStyle: 'italic' }}>Scale</span>
+                    <span className="label-mono text-accent" style={{
+                        background: 'rgba(255,206,59,0.05)', padding: '0.5rem 1rem',
+                        borderRadius: '100px', border: '1px dashed rgba(255,206,59,0.3)',
+                        display: 'inline-block', marginBottom: '2rem'
+                    }}>Proof of Work</span>
+                    <h1 style={{
+                        fontSize: 'clamp(3.5rem, 10vw, 9rem)',
+                        lineHeight: 0.9, letterSpacing: '-0.05em',
+                        textTransform: 'uppercase', margin: 0
+                    }}>
+                        Artifacts<br />of <span style={{ fontStyle: 'italic', color: 'transparent', WebkitTextStroke: '1px var(--text-primary)' }}>Scale</span>
                     </h1>
+                    <p style={{ marginTop: '2rem', fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px' }}>
+                        Real systems. Real results. Every project below is a deployed automation generating measurable value.
+                    </p>
                 </motion.div>
             </section>
 
-            <section style={{ padding: '4rem 0 10rem 0' }} className="container">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+            {/* Projects Grid */}
+            <section style={{ padding: '2rem 0 10rem 0' }} className="container">
+                <div className="work-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
                     {projects.map((project, idx) => (
                         <motion.div
                             key={idx}
-                            layoutId={`project-${idx}`}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: idx * 0.05 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
+                            transition={{ duration: 0.5, delay: idx * 0.05 }}
                             viewport={{ once: true, margin: "-50px" }}
                             onClick={() => setSelectedProject({ ...project, index: idx })}
+                            className="beam-border"
                             style={{
-                                background: 'rgba(255,255,255,0.02)',
-                                border: '1px solid rgba(255,255,255,0.05)',
-                                borderRadius: '32px',
-                                padding: '3rem',
+                                background: 'var(--bg-secondary)',
+                                borderRadius: '24px',
+                                padding: '2.5rem',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 cursor: 'pointer',
                                 position: 'relative',
                                 overflow: 'hidden',
-                                minHeight: '350px'
+                                minHeight: '320px',
+                                isolation: 'isolate'
                             }}
-                            className="group hover:border-accent/30 transition-colors"
                         >
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
-                                <motion.span layoutId={`industry-${idx}`} className="label-mono" style={{ color: 'var(--text-primary)', background: 'rgba(255,255,255,0.1)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.85rem' }}>
-                                    {project.industry}
-                                </motion.span>
-                                <ArrowRight className="text-secondary group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                            {/* Accent glow */}
+                            <div style={{
+                                position: 'absolute', top: 0, right: 0,
+                                width: '40%', height: '40%',
+                                background: 'radial-gradient(circle at top right, rgba(255,206,59,0.06) 0%, transparent 70%)',
+                                pointerEvents: 'none', zIndex: 0
+                            }} />
+
+                            <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                    <span className="label-mono" style={{
+                                        color: 'var(--accent)', background: 'rgba(255,206,59,0.08)',
+                                        padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.8rem'
+                                    }}>
+                                        {project.industry}
+                                    </span>
+                                    <motion.div
+                                        whileHover={{ x: 3, y: -3 }}
+                                        style={{
+                                            width: '40px', height: '40px', borderRadius: '50%',
+                                            background: 'rgba(255,255,255,0.05)',
+                                            display: 'flex', justifyContent: 'center', alignItems: 'center'
+                                        }}
+                                    >
+                                        <ArrowUpRight size={18} color="var(--text-secondary)" />
+                                    </motion.div>
+                                </div>
+
+                                <h3 style={{
+                                    fontSize: 'clamp(1.75rem, 2.5vw, 2.25rem)',
+                                    letterSpacing: '-0.02em',
+                                    margin: '0 0 1rem 0', lineHeight: 1.1
+                                }}>
+                                    {project.client}
+                                </h3>
+
+                                <p style={{
+                                    color: 'var(--text-secondary)', lineHeight: 1.6,
+                                    margin: 0, flexGrow: 1,
+                                    display: '-webkit-box', WebkitLineClamp: 3,
+                                    WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                                    fontSize: '0.95rem'
+                                }}>
+                                    {project.desc}
+                                </p>
+
+                                <div style={{
+                                    marginTop: '1.5rem', paddingTop: '1.5rem',
+                                    borderTop: '1px solid rgba(255,255,255,0.06)',
+                                    display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                    fontSize: '0.8rem', textTransform: 'uppercase',
+                                    letterSpacing: '0.08em', color: 'var(--text-secondary)'
+                                }}>
+                                    View Case Study <ArrowRight size={14} />
+                                </div>
                             </div>
-
-                            <motion.h3 layoutId={`title-${idx}`} style={{ fontSize: '2rem', letterSpacing: '-0.02em', margin: '0 0 1.5rem 0', lineHeight: 1.1 }}>
-                                {project.client}
-                            </motion.h3>
-
-                            <motion.p layoutId={`desc-${idx}`} style={{ color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0, flexGrow: 1, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                                {project.desc}
-                            </motion.p>
                         </motion.div>
                     ))}
                 </div>
@@ -238,87 +314,102 @@ const Work = () => {
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedProject(null)}
                             style={{
-                                position: 'fixed', inset: 0, background: 'rgba(10,10,12,0.9)',
-                                backdropFilter: 'blur(10px)', zIndex: 100
+                                position: 'fixed', inset: 0,
+                                background: 'rgba(4,4,5,0.9)',
+                                backdropFilter: 'blur(20px)',
+                                WebkitBackdropFilter: 'blur(20px)',
+                                zIndex: 100
                             }}
                         />
 
-                        {/* Modal Container */}
-                        <div style={{ position: 'fixed', inset: 0, zIndex: 101, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', pointerEvents: 'none' }}>
+                        {/* Modal */}
+                        <div style={{
+                            position: 'fixed', inset: 0, zIndex: 101,
+                            display: 'flex', justifyContent: 'center', alignItems: 'center',
+                            padding: '2rem', pointerEvents: 'none'
+                        }}>
                             <motion.div
-                                layoutId={`project-${selectedProject.index}`}
+                                initial={{ scale: 0.9, y: 30, opacity: 0 }}
+                                animate={{ scale: 1, y: 0, opacity: 1 }}
+                                exit={{ scale: 0.9, y: 30, opacity: 0 }}
+                                transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+                                className="beam-border"
                                 style={{
                                     background: 'var(--bg-secondary)',
-                                    border: '1px solid rgba(255,206,59,0.2)',
                                     borderRadius: '32px',
-                                    padding: '4rem',
+                                    padding: '3.5rem',
                                     width: '100%',
-                                    maxWidth: '1000px',
+                                    maxWidth: '900px',
                                     maxHeight: '90vh',
                                     overflowY: 'auto',
                                     pointerEvents: 'auto',
-                                    position: 'relative'
+                                    position: 'relative',
+                                    isolation: 'isolate'
                                 }}
                             >
                                 <button
                                     onClick={() => setSelectedProject(null)}
                                     style={{
-                                        position: 'absolute', top: '2rem', right: '2rem',
-                                        background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%',
-                                        width: '40px', height: '40px', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                        position: 'absolute', top: '1.5rem', right: '1.5rem',
+                                        background: 'rgba(255,255,255,0.05)', border: 'none',
+                                        borderRadius: '50%', width: '44px', height: '44px',
+                                        display: 'flex', justifyContent: 'center', alignItems: 'center',
                                         color: 'var(--text-primary)', cursor: 'pointer', zIndex: 10
                                     }}
-                                    className="hover:bg-white/10 transition-colors"
                                 >
                                     <X size={20} />
                                 </button>
 
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                                     <div>
-                                        <motion.span layoutId={`industry-${selectedProject.index}`} className="label-mono" style={{ color: 'var(--accent)', background: 'rgba(255,206,59,0.1)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.85rem', marginBottom: '1rem', display: 'inline-block' }}>
+                                        <span className="label-mono" style={{
+                                            color: 'var(--accent)', background: 'rgba(255,206,59,0.1)',
+                                            padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.8rem',
+                                            marginBottom: '1rem', display: 'inline-block'
+                                        }}>
                                             {selectedProject.industry}
-                                        </motion.span>
-                                        <motion.h3 layoutId={`title-${selectedProject.index}`} style={{ fontSize: '3.5rem', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1, color: 'var(--text-primary)' }}>
+                                        </span>
+                                        <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1, color: 'var(--text-primary)' }}>
                                             {selectedProject.client}
-                                        </motion.h3>
+                                        </h3>
                                     </div>
                                     <div style={{ textAlign: 'right' }}>
-                                        <span className="label-mono text-secondary block mb-1">Value Delivered</span>
-                                        <span style={{ fontSize: '1.5rem', color: 'var(--accent)', fontWeight: 600 }}>{selectedProject.details.metric}</span>
+                                        <span className="label-mono text-secondary" style={{ display: 'block', marginBottom: '0.25rem' }}>Value Delivered</span>
+                                        <span style={{ fontSize: '1.25rem', color: 'var(--accent)', fontWeight: 600 }}>{selectedProject.details.metric}</span>
                                     </div>
                                 </div>
 
-                                <motion.p layoutId={`desc-${selectedProject.index}`} style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.8, margin: '0 0 3rem 0', maxWidth: '800px' }}>
+                                <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', lineHeight: 1.8, margin: '0 0 2.5rem 0', maxWidth: '800px' }}>
                                     {selectedProject.desc}
-                                </motion.p>
+                                </p>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '3rem' }}>
-                                    {/* Problem Section */}
-                                    <div style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.02)', padding: '2rem', borderRadius: '16px', borderLeft: '4px solid rgba(255,255,255,0.1)' }}>
-                                        <h4 style={{ fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-primary)', marginBottom: '1rem' }}>The Bottleneck</h4>
-                                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', margin: 0, lineHeight: 1.6 }}>{selectedProject.details.problem}</p>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2.5rem' }}>
+                                    {/* Problem */}
+                                    <div style={{ gridColumn: '1 / -1', background: 'rgba(255,255,255,0.02)', padding: '2rem', borderRadius: '16px', borderLeft: '3px solid rgba(255,206,59,0.4)' }}>
+                                        <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', marginBottom: '0.75rem' }}>The Bottleneck</h4>
+                                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', margin: 0, lineHeight: 1.6 }}>{selectedProject.details.problem}</p>
                                     </div>
 
-                                    {/* Built Section */}
+                                    {/* Solution */}
                                     <div>
-                                        <h4 style={{ fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', marginBottom: '1.5rem' }}>Engineered Solution</h4>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent)', marginBottom: '1.25rem' }}>Engineered Solution</h4>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                             {selectedProject.details.solution.map((item, i) => (
-                                                <li key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)' }}>
-                                                    <span className="text-secondary" style={{ marginTop: '4px' }}>▹</span>
+                                                <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                                                    <span style={{ color: 'var(--accent)', marginTop: '3px', flexShrink: 0 }}>▹</span>
                                                     <span style={{ lineHeight: 1.5 }}>{item}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
 
-                                    {/* Results Section */}
+                                    {/* Results */}
                                     <div>
-                                        <h4 style={{ fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>Business Impact</h4>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-primary)', marginBottom: '1.25rem' }}>Business Impact</h4>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                             {selectedProject.details.results.map((item, i) => (
-                                                <li key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', color: 'var(--text-primary)' }}>
-                                                    <span className="text-accent" style={{ marginTop: '4px' }}>◆</span>
+                                                <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                                                    <span style={{ color: 'var(--accent)', marginTop: '3px', flexShrink: 0 }}>◆</span>
                                                     <span style={{ lineHeight: 1.5 }}>{item}</span>
                                                 </li>
                                             ))}
@@ -326,10 +417,11 @@ const Work = () => {
                                     </div>
                                 </div>
 
-                                <div style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center' }}>
-                                    <button className="btn btn-primary" onClick={() => window.location.href = '/discovery'} style={{ padding: '1.25rem 3rem', fontSize: '1.1rem' }}>
-                                        Solve A Similar Problem
-                                    </button>
+                                <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center' }}>
+                                    <a href="https://calendly.com/contact-digiton" target="_blank" rel="noopener noreferrer"
+                                        className="btn btn-primary" style={{ padding: '1.1rem 2.5rem', fontSize: '1rem' }}>
+                                        Solve A Similar Problem →
+                                    </a>
                                 </div>
                             </motion.div>
                         </div>

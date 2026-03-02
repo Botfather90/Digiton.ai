@@ -971,3 +971,102 @@ a {
 .node-glow {
   animation: node-glow 3s ease-in-out infinite;
 }
+
+/* ── Beam Border Animation ─────────────────────────────── */
+.beam-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.beam-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from var(--beam-angle, 0deg) at 50% 50%,
+      transparent 0%,
+      transparent 70%,
+      rgba(255, 206, 59, 0.8) 78%,
+      rgba(255, 206, 59, 1) 80%,
+      rgba(255, 206, 59, 0.8) 82%,
+      transparent 90%,
+      transparent 100%);
+  border-radius: inherit;
+  animation: beam-rotate 4s linear infinite;
+  z-index: -1;
+}
+
+.beam-border::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-primary);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-rotate {
+  0% {
+    --beam-angle: 0deg;
+  }
+
+  100% {
+    --beam-angle: 360deg;
+  }
+}
+
+/* Fallback for browsers that don't support @property */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .beam-border::before {
+    background: linear-gradient(135deg, rgba(255, 206, 59, 0.3) 0%, transparent 50%);
+    animation: beam-fallback 3s ease-in-out infinite;
+  }
+}
+
+@keyframes beam-fallback {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ── Mobile Responsive Fixes ───────────────────────────── */
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .workflow-orbital {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 1.5rem !important;
+    padding: 2rem 1rem !important;
+  }
+
+  .workflow-orbital .orbital-center {
+    position: relative !important;
+    margin: 0 auto 1rem auto !important;
+  }
+
+  .workflow-orbital .orbital-node {
+    position: relative !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+  }
+}

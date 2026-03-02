@@ -1,86 +1,106 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Linkedin, Mail, ArrowRight } from 'lucide-react';
+import { Linkedin, Mail, ArrowRight, X } from 'lucide-react';
 
 export const TeamMember = ({ name, role, description, image, links = {}, delay = 0 }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const layoutId = `team-member-${name.replace(/\s+/g, '-').toLowerCase()}`;
     const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2);
 
     return (
         <>
             {/* Base Card */}
             <motion.div
-                layoutId={layoutId}
                 onClick={() => setIsOpen(true)}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="beam-border"
                 style={{
                     position: 'relative',
-                    aspectRatio: '3/4',
-                    background: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.05)',
+                    background: 'var(--bg-secondary)',
                     borderRadius: '24px',
                     overflow: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
-                    padding: '2.5rem',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    isolation: 'isolate'
                 }}
-                className="group hover:border-accent/40 hover:bg-glass-bg transition-all duration-500"
             >
-                {/* Abstract Top Right Gradient */}
-                <div style={{ position: 'absolute', top: 0, right: 0, width: '60%', height: '60%', background: 'radial-gradient(circle at top right, rgba(255,206,59,0.05) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
-
-                {/* Hover Beam Effect */}
-                <motion.div
-                    variants={{
-                        initial: { x: '-100%', opacity: 0 },
-                        hover: { x: '250%', opacity: 1 }
-                    }}
-                    transition={{ duration: 1.5, ease: "linear", repeat: Infinity, repeatDelay: 1 }}
-                    style={{
-                        position: 'absolute',
-                        top: 0, bottom: 0, left: 0,
-                        width: '30%',
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(255,206,59,0.15) 50%, transparent 100%)',
-                        transform: 'skewX(-20deg)',
-                        zIndex: 1,
-                        pointerEvents: 'none'
-                    }}
-                />
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 2 }}>
-                    {/* Avatar */}
-                    <div style={{
-                        width: '60px', height: '60px', borderRadius: '50%',
-                        background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.25rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)',
-                        overflow: 'hidden'
-                    }}>
-                        {image ? (
-                            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : (
-                            initials
-                        )}
-                    </div>
-                    {links.linkedin && (
-                        <div style={{ color: 'var(--text-tertiary)' }} className="group-hover:text-accent transition-colors">
-                            <Linkedin size={20} />
+                {/* Photo — Full Width, Top Half */}
+                <div style={{
+                    width: '100%',
+                    height: '320px',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    background: 'rgba(255,255,255,0.03)'
+                }}>
+                    {image ? (
+                        <motion.img
+                            src={image}
+                            alt={name}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.6 }}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'top center',
+                                display: 'block'
+                            }}
+                        />
+                    ) : (
+                        <div style={{
+                            width: '100%', height: '100%',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '4rem', fontFamily: 'var(--font-mono)',
+                            color: 'var(--text-tertiary)',
+                            background: 'linear-gradient(135deg, rgba(255,206,59,0.05) 0%, rgba(255,255,255,0.02) 100%)'
+                        }}>
+                            {initials}
                         </div>
                     )}
+                    {/* Gradient overlay at bottom of photo */}
+                    <div style={{
+                        position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px',
+                        background: 'linear-gradient(to top, var(--bg-secondary), transparent)',
+                        pointerEvents: 'none'
+                    }} />
                 </div>
 
-                <div style={{ position: 'relative', zIndex: 1, marginTop: 'auto' }}>
-                    <h3 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0', letterSpacing: '-0.02em', lineHeight: 1.2 }}>{name}</h3>
-                    <span className="label-mono" style={{ display: 'block', color: 'var(--accent)', fontSize: '0.9rem' }}>{role}</span>
-                </div>
+                {/* Info Section */}
+                <div style={{ padding: '1.5rem 2rem 2rem', position: 'relative', zIndex: 2 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <div>
+                            <h3 style={{
+                                fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                                margin: '0 0 0.4rem 0',
+                                letterSpacing: '-0.02em',
+                                lineHeight: 1.2,
+                                color: 'var(--text-primary)'
+                            }}>{name}</h3>
+                            <span className="label-mono" style={{
+                                display: 'block',
+                                color: 'var(--accent)',
+                                fontSize: '0.8rem'
+                            }}>{role}</span>
+                        </div>
+                        {links.linkedin && (
+                            <div style={{ color: 'var(--text-tertiary)', marginTop: '4px' }}>
+                                <Linkedin size={18} />
+                            </div>
+                        )}
+                    </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.5rem', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-secondary)' }} className="group-hover:text-primary transition-colors">
-                    View Profile <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    <div style={{
+                        display: 'flex', alignItems: 'center', gap: '0.5rem',
+                        marginTop: '1.25rem', fontSize: '0.8rem',
+                        textTransform: 'uppercase', letterSpacing: '0.08em',
+                        color: 'var(--text-secondary)'
+                    }}>
+                        View Profile <ArrowRight size={14} />
+                    </div>
                 </div>
             </motion.div>
 
@@ -95,7 +115,7 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                         style={{
                             position: 'fixed',
                             inset: 0,
-                            background: 'rgba(4,4,5,0.8)',
+                            background: 'rgba(4,4,5,0.85)',
                             backdropFilter: 'blur(20px)',
                             WebkitBackdropFilter: 'blur(20px)',
                             zIndex: 999,
@@ -106,82 +126,123 @@ export const TeamMember = ({ name, role, description, image, links = {}, delay =
                         }}
                     >
                         <motion.div
-                            layoutId={layoutId}
+                            initial={{ scale: 0.9, y: 30 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.9, y: 30 }}
                             onClick={(e) => e.stopPropagation()}
+                            className="beam-border"
                             style={{
                                 background: 'var(--bg-secondary)',
-                                border: '1px solid rgba(255,255,255,0.1)',
                                 borderRadius: '32px',
-                                padding: '4rem',
+                                padding: '0',
                                 maxWidth: '700px',
                                 width: '100%',
                                 position: 'relative',
-                                display: 'grid',
-                                gridTemplateColumns: 'minmax(0, 1fr)',
-                                gap: '3rem'
+                                overflow: 'hidden',
+                                maxHeight: '90vh',
+                                overflowY: 'auto',
+                                isolation: 'isolate'
                             }}
                         >
                             <button
                                 onClick={() => setIsOpen(false)}
-                                style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'transparent', border: 'none', color: 'var(--text-secondary)', fontSize: '2rem', cursor: 'pointer', lineHeight: 1 }}
-                                className="hover:text-primary transition-colors"
+                                style={{
+                                    position: 'absolute', top: '1.5rem', right: '1.5rem',
+                                    background: 'rgba(0,0,0,0.5)', border: 'none',
+                                    borderRadius: '50%', width: '40px', height: '40px',
+                                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                    color: 'white', cursor: 'pointer', zIndex: 10,
+                                    backdropFilter: 'blur(10px)'
+                                }}
                             >
-                                ×
+                                <X size={18} />
                             </button>
 
-                            <div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2rem' }}>
+                            {/* Large Photo */}
+                            <div style={{
+                                width: '100%', height: '350px',
+                                overflow: 'hidden', position: 'relative'
+                            }}>
+                                {image ? (
+                                    <img
+                                        src={image}
+                                        alt={name}
+                                        style={{
+                                            width: '100%', height: '100%',
+                                            objectFit: 'cover', objectPosition: 'top center'
+                                        }}
+                                    />
+                                ) : (
                                     <div style={{
-                                        width: '100px', height: '100px', borderRadius: '50%',
-                                        background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        fontSize: '2rem', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)',
-                                        overflow: 'hidden'
+                                        width: '100%', height: '100%',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        fontSize: '5rem', fontFamily: 'var(--font-mono)',
+                                        color: 'var(--text-tertiary)',
+                                        background: 'linear-gradient(135deg, rgba(255,206,59,0.05), rgba(255,255,255,0.02))'
                                     }}>
-                                        {image ? (
-                                            <div style={{ position: 'relative', width: '100%', paddingBottom: '125%', overflow: 'hidden' }}>
-                                                <motion.img
-                                                    src={image}
-                                                    alt={name}
-                                                    whileHover={{ scale: 1.05 }}
-                                                    transition={{ duration: 0.4 }}
-                                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                                                />
-                                            </div>
-                                        ) : (
-                                            initials
-                                        )}
+                                        {initials}
                                     </div>
-                                    <motion.div>
-                                        <motion.h3 style={{ fontSize: '3rem', margin: '0 0 0.5rem 0', letterSpacing: '-0.03em', lineHeight: 1 }}>{name}</motion.h3>
-                                        <motion.span className="label-mono" style={{ display: 'block', color: 'var(--accent)', fontSize: '1.1rem' }}>{role}</motion.span>
-                                    </motion.div>
-                                </div>
+                                )}
+                                <div style={{
+                                    position: 'absolute', bottom: 0, left: 0, right: 0, height: '100px',
+                                    background: 'linear-gradient(to top, var(--bg-secondary), transparent)',
+                                    pointerEvents: 'none'
+                                }} />
+                            </div>
+
+                            {/* Content */}
+                            <div style={{ padding: '2rem 3rem 3rem' }}>
+                                <h3 style={{
+                                    fontSize: 'clamp(2rem, 4vw, 3rem)',
+                                    margin: '0 0 0.5rem 0',
+                                    letterSpacing: '-0.03em', lineHeight: 1
+                                }}>{name}</h3>
+                                <span className="label-mono" style={{
+                                    display: 'block', color: 'var(--accent)',
+                                    fontSize: '1rem', marginBottom: '1.5rem'
+                                }}>{role}</span>
 
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.5 }}
                                 >
-                                    <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '3rem' }}>
+                                    <p style={{
+                                        fontSize: '1.15rem', color: 'var(--text-secondary)',
+                                        lineHeight: 1.7, marginBottom: '2rem'
+                                    }}>
                                         {description}
                                     </p>
 
                                     {/* Social Links */}
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
+                                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                         {links.linkedin && (
-                                            <a href={links.linkedin} target="_blank" rel="noopener noreferrer" className="btn" style={{ padding: '0.75rem 1.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                            <a href={links.linkedin} target="_blank" rel="noopener noreferrer"
+                                                className="btn" style={{
+                                                    padding: '0.75rem 1.5rem',
+                                                    background: 'rgba(255,255,255,0.05)',
+                                                    border: '1px solid rgba(255,255,255,0.1)',
+                                                    color: 'var(--text-primary)',
+                                                    display: 'flex', alignItems: 'center', gap: '0.75rem'
+                                                }}>
                                                 <Linkedin size={18} /> LinkedIn
                                             </a>
                                         )}
                                         {links.email && (
-                                            <a href={`mailto:${links.email}`} className="btn" style={{ padding: '0.75rem 1.5rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                            <a href={`mailto:${links.email}`}
+                                                className="btn" style={{
+                                                    padding: '0.75rem 1.5rem',
+                                                    background: 'transparent',
+                                                    border: '1px solid rgba(255,255,255,0.1)',
+                                                    color: 'var(--text-primary)',
+                                                    display: 'flex', alignItems: 'center', gap: '0.75rem'
+                                                }}>
                                                 <Mail size={18} /> Email
                                             </a>
                                         )}
                                     </div>
                                 </motion.div>
                             </div>
-
                         </motion.div>
                     </motion.div>
                 )}

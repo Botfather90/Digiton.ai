@@ -143,7 +143,7 @@ const Home = () => {
                         <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginTop: '1rem' }}>Case <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>Studies</span></h2>
                     </div>
                 </div>
-                <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+                <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
                     {[
                         { client: "Medical Family", tag: "Healthcare", title: "AI Receptionist & Booking Automations", result: "34% increase in bookings within 60 days. Zero missed calls.", size: 'large' },
                         { client: "TEM", tag: "Agency", title: "Full Campaign QA Pipeline", result: "QA time reduced from 4 hours to 15 minutes per campaign.", size: 'small' },
@@ -152,58 +152,53 @@ const Home = () => {
                         <motion.div key={idx}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
+                            whileHover={{ y: -8, scale: 1.02 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: idx * 0.1 }}
-                            className={`group ${study.size === 'large' ? 'lg:col-span-2' : 'col-span-1'}`}
+                            className={`beam-border ${study.size === 'large' ? 'lg:col-span-2' : 'col-span-1'}`}
                             style={{
                                 position: 'relative',
-                                background: 'rgba(255,255,255,0.02)',
-                                border: '1px solid rgba(255,255,255,0.05)',
-                                borderRadius: '32px',
+                                background: 'var(--bg-secondary)',
+                                borderRadius: '28px',
                                 overflow: 'hidden',
                                 padding: '3rem',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                minHeight: '400px',
-                                cursor: 'pointer'
+                                minHeight: '380px',
+                                cursor: 'pointer',
+                                isolation: 'isolate'
                             }}
                             onClick={() => navigate('/work')}
                         >
-                            {/* Hover Beam Effect */}
-                            <motion.div
-                                variants={{
-                                    initial: { x: '-100%', opacity: 0 },
-                                    hover: { x: '200%', opacity: 1 }
-                                }}
-                                transition={{ duration: 1.5, ease: "linear", repeat: Infinity, repeatDelay: 1 }}
-                                style={{
-                                    position: 'absolute',
-                                    top: 0, bottom: 0, left: 0,
-                                    width: '30%',
-                                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,206,59,0.08) 50%, transparent 100%)',
-                                    transform: 'skewX(-20deg)',
-                                    zIndex: 0,
-                                    pointerEvents: 'none'
-                                }}
-                            />
+                            {/* Accent gradient glow */}
+                            <div style={{
+                                position: 'absolute', top: 0, right: 0, width: '50%', height: '50%',
+                                background: 'radial-gradient(circle at top right, rgba(255,206,59,0.06) 0%, transparent 70%)',
+                                pointerEvents: 'none', zIndex: 0
+                            }} />
 
                             <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'auto' }}>
-                                    <span className="label-mono" style={{ color: 'var(--bg-primary)', background: 'var(--text-primary)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.85rem' }}>{study.tag}</span>
-                                    <ArrowRight className="text-secondary group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" size={24} />
+                                    <span className="label-mono" style={{ color: 'var(--bg-primary)', background: 'var(--accent)', padding: '0.4rem 1rem', borderRadius: '100px', fontSize: '0.8rem', fontWeight: 600 }}>{study.tag}</span>
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                    >
+                                        <ArrowRight className="text-secondary" size={20} />
+                                    </motion.div>
                                 </div>
                                 <div style={{ marginTop: '3rem' }}>
                                     <h3 style={{ fontSize: 'clamp(2rem, 3vw, 2.5rem)', margin: '0 0 1rem 0', lineHeight: 1.1, letterSpacing: '-0.02em' }}>{study.client}</h3>
-                                    <p style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 500, margin: '0 0 0.5rem 0' }}>{study.title}</p>
-                                    <p style={{ color: 'var(--text-secondary)', margin: 0 }}>{study.result}</p>
+                                    <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500, margin: '0 0 0.5rem 0' }}>{study.title}</p>
+                                    <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: '0.95rem' }}>{study.result}</p>
                                 </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
 
-                <div style={{ padding: '4rem 0', textAlign: 'center', background: 'var(--bg-primary)' }}>
-                    <Link to="/work" className="btn btn-glass">View All 9 Case Studies</Link>
+                <div style={{ padding: '4rem 0', textAlign: 'center' }}>
+                    <Link to="/work" className="btn btn-primary" style={{ padding: '1rem 2.5rem' }}>View All Case Studies →</Link>
                 </div>
             </section>
 
@@ -227,7 +222,7 @@ const Home = () => {
                         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 0' }}>We are a compact strike team of engineers, growth experts, and operators.</p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+                    <div className="team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
                         <TeamMember
                             name="Brandon da Costa"
                             role="CEO & AI Architect"
