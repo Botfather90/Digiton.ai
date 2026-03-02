@@ -2,86 +2,84 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Webhook, Brain, Database, Mail, Zap } from 'lucide-react';
 
-export const WorkflowVis = () => {
-    const nodeVariants = {
-        hidden: { scale: 0, opacity: 0 },
-        visible: i => ({
-            scale: 1,
-            opacity: 1,
-            transition: { delay: i * 0.5, type: 'spring', stiffness: 100 }
-        })
-    };
-
-    const pulseVariants = {
-        pulse: { boxShadow: ['0 0 0 0 rgba(255, 206, 59, 0.4)', '0 0 0 20px rgba(255, 206, 59, 0)'], transition: { duration: 1.5, repeat: Infinity } }
-    };
-
-    const Node = ({ icon: Icon, label, color, delayIdx, x, y }) => (
+const GlowNode = ({ icon: Icon, label, color, x, y, delay = 0 }) => (
+    <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 80, delay }}
+        style={{
+            position: 'absolute', left: `${x}%`, top: `${y}%`,
+            transform: 'translate(-50%, -50%)', display: 'flex',
+            flexDirection: 'column', alignItems: 'center', zIndex: 2
+        }}
+    >
         <motion.div
-            custom={delayIdx}
-            initial="hidden"
-            animate="visible"
-            style={{ position: 'absolute', left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 2 }}
+            animate={{ boxShadow: [`0 0 8px ${color}33`, `0 0 20px ${color}66`, `0 0 8px ${color}33`] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+                width: 64, height: 64, borderRadius: 16,
+                background: color + '22', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', border: `1px solid ${color}55`,
+                backdropFilter: 'blur(8px)'
+            }}
         >
-            <motion.div 
-                variants={pulseVariants}
-                animate="pulse"
-                style={{ width: '64px', height: '64px', borderRadius: '16px', background: color, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.1)' }}
-            >
-                <Icon size={28} color="white" />
-            </motion.div>
-            <span className="label-mono" style={{ marginTop: '0.75rem', fontWeight: 600 }}>{label}</span>
+            <Icon size={28} color="white" />
         </motion.div>
-    );
+        <motion.span
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: delay + 0.3 }}
+            className="label-mono"
+            style={{ marginTop: '0.5rem', fontWeight: 600, fontSize: '9px' }}
+        >
+            {label}
+        </motion.span>
+    </motion.div>
+);
 
+export const WorkflowVis = () => {
     return (
         <div style={{ width: '100%', height: '400px', position: 'relative', background: 'var(--bg-primary)', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-            
-            {/* Connection Lines */}
-            <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}>
-                <motion.path 
-                    d="M 15% 50% L 35% 30%" stroke="var(--text-secondary)" strokeWidth="2" strokeDasharray="5,5" fill="transparent"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5, duration: 1 }}
-                />
-                <motion.path 
-                    d="M 15% 50% L 35% 70%" stroke="var(--text-secondary)" strokeWidth="2" strokeDasharray="5,5" fill="transparent"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5, duration: 1 }}
-                />
-                <motion.path 
-                    d="M 35% 30% L 65% 50%" stroke="var(--text-secondary)" strokeWidth="2" strokeDasharray="5,5" fill="transparent"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1, duration: 1 }}
-                />
-                <motion.path 
-                    d="M 35% 70% L 65% 50%" stroke="var(--text-secondary)" strokeWidth="2" strokeDasharray="5,5" fill="transparent"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.5, duration: 1 }}
-                />
-                <motion.path 
-                    d="M 65% 50% L 85% 50%" stroke="var(--accent)" strokeWidth="3" fill="transparent"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 2.5, duration: 0.5 }}
-                />
+            <div style={{ position: 'absolute', inset: 0, opacity: 0.06, backgroundImage: 'radial-gradient(var(--text-secondary) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-                {/* Animated Data Packets */}
-                <motion.circle r="4" fill="var(--accent)"
-                    animate={{ cx: ["15%", "35%"], cy: ["50%", "30%"] }}
-                    transition={{ duration: 1, repeat: Infinity, repeatDelay: 3 }}
-                />
-                <motion.circle r="4" fill="var(--accent)"
-                    animate={{ cx: ["15%", "35%"], cy: ["50%", "70%"] }}
-                    transition={{ duration: 1, repeat: Infinity, repeatDelay: 3.5 }}
-                />
-                <motion.circle r="4" fill="#27C93F"
-                    animate={{ cx: ["65%", "85%"], cy: ["50%", "50%"] }}
-                    transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-                />
+            {/* Connection Lines with glow */}
+            <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}>
+                <defs>
+                    <filter id="wfGlow"><feGaussianBlur stdDeviation="3" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                </defs>
+
+                {/* Paths with glow */}
+                {[
+                    { d: 'M 15% 50% L 35% 30%', delay: 0.3 },
+                    { d: 'M 15% 50% L 35% 70%', delay: 0.5 },
+                    { d: 'M 35% 30% L 62% 50%', delay: 0.8 },
+                    { d: 'M 35% 70% L 62% 50%', delay: 1.0 },
+                    { d: 'M 62% 50% L 85% 50%', delay: 1.3 },
+                ].map((line, i) => (
+                    <React.Fragment key={i}>
+                        <motion.path d={line.d} stroke="rgba(255,206,59,0.3)" strokeWidth="4" fill="transparent" filter="url(#wfGlow)" strokeLinecap="round"
+                            initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: [0, 0.4] }} transition={{ delay: line.delay, duration: 1 }} />
+                        <motion.path d={line.d} stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" fill="transparent" strokeDasharray="6,4"
+                            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: line.delay, duration: 0.8 }} />
+                    </React.Fragment>
+                ))}
+
+                {/* Traveling data particles */}
+                <motion.circle r="4" fill="var(--accent)" filter="url(#wfGlow)"
+                    animate={{ cx: ['15%', '35%', '62%'], cy: ['50%', '30%', '50%'], opacity: [0, 1, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }} />
+                <motion.circle r="4" fill="#27C93F" filter="url(#wfGlow)"
+                    animate={{ cx: ['15%', '35%', '62%'], cy: ['50%', '70%', '50%'], opacity: [0, 1, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }} />
+                <motion.circle r="5" fill="var(--accent)" filter="url(#wfGlow)"
+                    animate={{ cx: ['62%', '85%'], cy: ['50%', '50%'], opacity: [0, 1, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: 2 }} />
             </svg>
 
-            <Node icon={Webhook} label="Stripe Webhook" color="rgba(99, 91, 255, 0.8)" delayIdx={0} x={15} y={50} />
-            <Node icon={Brain} label="LLM Filter" color="rgba(16, 163, 127, 0.8)" delayIdx={1} x={35} y={30} />
-            <Node icon={Database} label="CRM Update" color="rgba(0, 107, 255, 0.8)" delayIdx={2} x={35} y={70} />
-            <Node icon={Zap} label="n8n Core" color="var(--accent)" delayIdx={3} x={65} y={50} />
-            <Node icon={Mail} label="Client Auth Email" color="rgba(255, 95, 86, 0.8)" delayIdx={4} x={85} y={50} />
-            
+            <GlowNode icon={Webhook} label="STRIPE WEBHOOK" color="#635BFF" x={15} y={50} delay={0} />
+            <GlowNode icon={Brain} label="LLM FILTER" color="#10A37F" x={35} y={30} delay={0.3} />
+            <GlowNode icon={Database} label="CRM UPDATE" color="#006BFF" x={35} y={70} delay={0.5} />
+            <GlowNode icon={Zap} label="N8N CORE" color="#FFCE3B" x={62} y={50} delay={0.8} />
+            <GlowNode icon={Mail} label="CLIENT EMAIL" color="#FF5F56" x={85} y={50} delay={1.1} />
         </div>
     );
 };

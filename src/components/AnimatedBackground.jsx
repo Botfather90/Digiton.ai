@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
+const Particle = ({ delay, x, y, size, duration, drift }) => (
+    <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{
+            opacity: [0, 0.6, 0.3, 0.7, 0],
+            scale: [0, 1, 0.8, 1.1, 0],
+            x: [0, drift, -drift * 0.5, drift * 0.3, 0],
+            y: [0, -drift * 0.7, drift * 0.3, -drift, 0]
+        }}
+        transition={{
+            duration,
+            repeat: Infinity,
+            delay,
+            ease: 'easeInOut'
+        }}
+        style={{
+            position: 'absolute',
+            left: `${x}%`,
+            top: `${y}%`,
+            width: size,
+            height: size,
+            borderRadius: '50%',
+            background: 'var(--accent)',
+            boxShadow: `0 0 ${size * 2}px rgba(255, 206, 59, 0.4)`,
+        }}
+    />
+);
+
 export const AnimatedBackground = () => {
-    // Generate an array of background abstract elements
-    const elements = Array.from({ length: 6 });
+    const particles = useMemo(() =>
+        Array.from({ length: 60 }, (_, i) => ({
+            id: i,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: Math.random() * 3 + 1,
+            delay: Math.random() * 15,
+            duration: Math.random() * 12 + 10,
+            drift: Math.random() * 40 + 15,
+        })), []);
 
     return (
         <div style={{
@@ -11,73 +47,80 @@ export const AnimatedBackground = () => {
             inset: 0,
             overflow: 'hidden',
             pointerEvents: 'none',
-            zIndex: -1, // Keep it strictly behind all content
+            zIndex: -1,
             background: 'var(--bg-primary)'
         }}>
+            {/* Aurora Ribbon 1 */}
+            <div className="aurora-ribbon aurora-ribbon-1" />
 
-            {/* Base ambient noise/texture could go here if needed, but keeping it clean for now */}
+            {/* Aurora Ribbon 2 */}
+            <div className="aurora-ribbon aurora-ribbon-2" />
 
-            {elements.map((_, i) => {
-                // Randomize starting positions and animation paths for organic feel
-                const randomX = Math.random() * 100;
-                const randomY = Math.random() * 100;
-                const size = Math.random() * 40 + 20; // 20vw to 60vw
-                const duration = Math.random() * 20 + 20; // 20s to 40s
-                const delay = Math.random() * -20; // Start at different times
-
-                return (
-                    <motion.div
-                        key={i}
-                        animate={{
-                            x: [
-                                `${randomX}vw`,
-                                `${(randomX + 30) % 100}vw`,
-                                `${(randomX - 20 + 100) % 100}vw`,
-                                `${randomX}vw`
-                            ],
-                            y: [
-                                `${randomY}vh`,
-                                `${(randomY - 30 + 100) % 100}vh`,
-                                `${(randomY + 40) % 100}vh`,
-                                `${randomY}vh`
-                            ],
-                            scale: [1, 1.2, 0.8, 1],
-                            opacity: [0.03, 0.06, 0.02, 0.03]
-                        }}
-                        transition={{
-                            duration: duration,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: delay
-                        }}
-                        style={{
-                            position: 'absolute',
-                            width: `${size}vw`,
-                            height: `${size}vw`,
-                            background: i % 2 === 0
-                                ? 'radial-gradient(circle, var(--accent) 0%, transparent 60%)'
-                                : 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%)',
-                            filter: 'blur(80px)',
-                            borderRadius: '50%',
-                        }}
-                    />
-                );
-            })}
-
-            {/* Subtle moving grid overlay */}
+            {/* Ambient Glow Orb */}
             <motion.div
                 animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%']
+                    x: ['0vw', '20vw', '-10vw', '15vw', '0vw'],
+                    y: ['0vh', '15vh', '-5vh', '10vh', '0vh'],
+                    scale: [1, 1.3, 0.9, 1.1, 1],
                 }}
-                transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                style={{
+                    position: 'absolute',
+                    top: '10%',
+                    left: '20%',
+                    width: '50vw',
+                    height: '50vw',
+                    background: 'radial-gradient(circle, rgba(255,206,59,0.04) 0%, transparent 60%)',
+                    filter: 'blur(80px)',
+                    borderRadius: '50%',
+                }}
+            />
+
+            {/* Secondary cold orb */}
+            <motion.div
+                animate={{
+                    x: ['0vw', '-15vw', '10vw', '-5vw', '0vw'],
+                    y: ['0vh', '-10vh', '20vh', '-15vh', '0vh'],
+                    scale: [1, 0.8, 1.2, 0.9, 1],
+                }}
+                transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+                style={{
+                    position: 'absolute',
+                    bottom: '10%',
+                    right: '10%',
+                    width: '40vw',
+                    height: '40vw',
+                    background: 'radial-gradient(circle, rgba(100,130,255,0.03) 0%, transparent 60%)',
+                    filter: 'blur(100px)',
+                    borderRadius: '50%',
+                }}
+            />
+
+            {/* Particle Field */}
+            {particles.map(p => (
+                <Particle key={p.id} {...p} />
+            ))}
+
+            {/* Moving dot grid with pulse */}
+            <motion.div
+                animate={{
+                    backgroundPosition: ['0% 0%', '100% 100%'],
+                    opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{
+                    backgroundPosition: { duration: 80, repeat: Infinity, ease: 'linear' },
+                    opacity: { duration: 8, repeat: Infinity, ease: 'easeInOut' }
+                }}
                 style={{
                     position: 'absolute',
                     inset: 0,
-                    backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                    opacity: 0.5
+                    backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
+                    backgroundSize: '32px 32px',
                 }}
             />
+
+            {/* Scanline overlay */}
+            <div className="scanline-overlay" />
         </div>
     );
 };

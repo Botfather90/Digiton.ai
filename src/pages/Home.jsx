@@ -33,17 +33,11 @@ const Home = () => {
             {/* More Normal but Premium Hero */}
             <section style={{ minHeight: '100vh', width: '100%', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '100px 5vw 0 5vw', justifyContent: 'center' }}>
                 <Hero3D />
-                {/* Horizontal Beam Animation */}
-                <motion.div
-                    animate={{ x: ['-200%', '200%'] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'linear', repeatDelay: 1 }}
-                    style={{ position: 'absolute', top: '25%', left: 0, width: '30%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--accent), transparent)', opacity: 0.5, zIndex: 0 }}
-                />
-                <motion.div
-                    animate={{ y: ['-200%', '300%'] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: 'linear', repeatDelay: 2 }}
-                    style={{ position: 'absolute', top: 0, right: '15%', width: '1px', height: '30%', background: 'linear-gradient(180deg, transparent, var(--accent), transparent)', opacity: 0.5, zIndex: 0 }}
-                />
+                {/* Laser Beam Sweeps */}
+                <div className="laser-beam laser-beam-h" style={{ top: '22%', left: 0, width: '40%', animationDuration: '5s' }} />
+                <div className="laser-beam laser-beam-h" style={{ top: '78%', left: 0, width: '25%', animationDuration: '7s', animationDelay: '2s', opacity: 0.5 }} />
+                <div className="laser-beam laser-beam-v" style={{ left: '15%', top: 0, height: '35%', animationDuration: '6s' }} />
+                <div className="laser-beam laser-beam-v" style={{ right: '12%', top: 0, height: '40%', animationDuration: '8s', animationDelay: '3s', opacity: 0.4 }} />
 
                 <div style={{ position: 'relative', zIndex: 1, maxWidth: '900px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} style={{ marginBottom: '2rem' }}>
